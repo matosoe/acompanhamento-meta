@@ -79,11 +79,11 @@ Pendências: <nenhuma ou lista objetiva>
 
 | Fase | Estado | Responsável | Gate de saída |
 |---|---|---|---|
-| PRE — ambiente e acessos | Em andamento | Proprietário + orquestrador | Toolchain verificada |
+| PRE — ambiente e acessos | Concluída | Proprietário + orquestrador | Toolchain verificada |
 | F00 — governança e decisões | Concluída | Orquestrador | ADRs aprovados |
 | F01 — bootstrap Android | Concluída | Arquiteto Android | `assembleDebug`, testes e lint passam; app aberto em emulador e Galaxy M62 |
 | F02 — dados locais | Concluída | Agente de dados | Room, seed, CRUD, reabertura, índices e bloqueio de sobreposição testados |
-| F03 — domínio e agregações | Não iniciado | Agente de domínio | Regras críticas cobertas por testes |
+| F03 — domínio e agregações | Concluída | Agente de domínio | Regras críticas cobertas por testes |
 | F04 — tela Hoje | Em andamento | Orquestrador | CRUD vertical utilizável |
 | F05 — metas | Não iniciado | Agente de UI Metas | Cálculos e edição validados |
 | F06 — evolução diária | Não iniciado | Agente de UI Gráficos | 7/30/90 dias validados |
