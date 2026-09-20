@@ -742,7 +742,8 @@ Executar apenas se o ADR confirmar o recurso no MVP.
   - Evidência: `QualityNavigationInstrumentedTest` verifica Hoje, evolução diária, semanal, dados/exportação e configurações; a suíte instrumentada API 37 passou com 11 testes e zero falhas.
 - [x] **F10-05 — teste de cinco anos de dados sintéticos**
   - Evidência: `DailyChartCalculatorTest` gera e processa um lançamento diário por cinco anos, preservando o total e as durações de primeiro/último dia.
-- [ ] **F10-06 — consultas e gráficos em até dois segundos no Galaxy M62**
+- [x] **F10-06 — consultas e gráficos em até dois segundos no Galaxy M62**
+  - Evidência: `PerformanceInstrumentedTest` cria 1.826 registros, consulta Room e transforma o gráfico diário sob o limite de 2 s no SM-M625F. A primeira medição revelou 11.663 ms e levou à otimização do particionamento diário; a repetição passou.
 - [x] **F10-07 — lint sem erros e revisão de warnings**
   - Evidência: `lintDebug` passou com zero avisos após corrigir pluralização, internacionalização, autofill/rótulos, atualização dos adapters, áreas de toque e acessibilidade de clique dos gráficos.
 - [x] **F10-08 — contraste e tema escuro**
@@ -767,6 +768,7 @@ Executar apenas se o ADR confirmar o recurso no MVP.
   - Testar seletor de arquivos e compartilhamento CSV nos aplicativos disponíveis no aparelho.
   - Reiniciar o aparelho e confirmar persistência Room e recuperação do cronômetro, se implementado.
   - Registrar versão do Android, nível de API, versão do One UI, espaço livre e build do aplicativo usado no teste.
+  - Parcial em 2026-09-20: SM-M625F Android 13/API 33, 1080×2400, 450 dpi e cerca de 30,7 GB livres passou os 12 testes instrumentados, incluindo CRUD, persistência, meia-noite, gráficos e exportação/navegação. A inspeção visual de retrato/paisagem, fonte e tema permanece pendente porque a cortina de notificações permaneceu em primeiro plano durante a coleta por ADB.
 
 - [x] **F10-14 — extremos de compatibilidade em emulador**
   - Evidência: APK debug instalou e abriu no AVD API 26; a suíte UI completa passou no AVD API 37 (11 testes, zero falhas).
@@ -890,6 +892,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F10-06 e F10-13 | F10-06 concluída; F10-13 parcial | Galaxy M62 SM-M625F: `PerformanceInstrumentedTest` passou sob 2 s e 12 testes instrumentados passaram sem falhas; visual bloqueado pela cortina de notificações | ainda não criado |
 | 2026-09-20 | /root | F10-02 a F10-05, F10-07 a F10-12, F10-14 | Concluídos; F10-06/F10-13 dependem do Galaxy M62 | `clean test lintDebug assembleDebug` passou; lint com 0 avisos; API 37: 11 testes instrumentados, 0 falhas; APK abriu no API 26 | `e25486b` |
 | 2026-09-20 | /root | F10-01 | Concluída | Casos-limite de domínio e CSV cobertos | `test`, `lintDebug` e `assembleDebug` passaram; 31 avisos de lint encaminhados para F10-07 | `49a3304` |
 | 2026-09-20 | /root | F08-01 a F08-06 | Implementação concluída; homologação Excel/Calc pendente | `CsvExporterTest` cobre BOM, seis colunas, RFC 4180 e meia-noite; `test`, `lintDebug`, `assembleDebug` e `connectedDebugAndroidTest` (8 testes, 0 falhas) passaram no AVD API 37; Excel/Calc ausentes | `c9958b2` |

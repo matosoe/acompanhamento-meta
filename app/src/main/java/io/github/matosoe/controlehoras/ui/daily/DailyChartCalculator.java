@@ -1,6 +1,7 @@
 package io.github.matosoe.controlehoras.ui.daily;
 
 import androidx.annotation.NonNull;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -20,14 +21,18 @@ public final class DailyChartCalculator {
                                                @NonNull Set<Long> selectedIds, @NonNull ZoneId zone) {
         if (!endExclusive.isAfter(start)) throw new IllegalArgumentException("Período inválido.");
         Map<Long, Map<LocalDate, Long>> actual = new HashMap<>();
+        long periodStart = start.atStartOfDay(zone).toInstant().toEpochMilli();
+        long periodEnd = endExclusive.atStartOfDay(zone).toInstant().toEpochMilli();
         for (TimeEntryEntity entry : entries) {
-            LocalDate cursor = start;
+            if (entry.endEpochMillis <= periodStart || entry.startEpochMillis >= periodEnd) continue;
+            LocalDate cursor = Instant.ofEpochMilli(Math.max(entry.startEpochMillis, periodStart)).atZone(zone).toLocalDate();
             while (cursor.isBefore(endExclusive)) {
                 long dayStart = cursor.atStartOfDay(zone).toInstant().toEpochMilli();
                 long dayEnd = cursor.plusDays(1).atStartOfDay(zone).toInstant().toEpochMilli();
                 long overlap = Math.min(entry.endEpochMillis, dayEnd) - Math.max(entry.startEpochMillis, dayStart);
                 if (overlap > 0) actual.computeIfAbsent(entry.categoryId, ignored -> new HashMap<>())
                         .merge(cursor, overlap / 1_000L, Long::sum);
+                if (dayEnd >= entry.endEpochMillis) break;
                 cursor = cursor.plusDays(1);
             }
         }
