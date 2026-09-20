@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F02-01` — implementar entidades Room |
+| Próxima etapa | `F03-01` — serviço de divisão por dia |
 
 ## 1. Objetivo deste plano
 
@@ -82,7 +82,7 @@ Pendências: <nenhuma ou lista objetiva>
 | PRE — ambiente e acessos | Em andamento | Proprietário + orquestrador | Toolchain verificada |
 | F00 — governança e decisões | Concluída | Orquestrador | ADRs aprovados |
 | F01 — bootstrap Android | Concluída | Arquiteto Android | `assembleDebug`, testes e lint passam; app aberto em emulador e Galaxy M62 |
-| F02 — dados locais | Não iniciado | Agente de dados | Room e CRUD testados |
+| F02 — dados locais | Concluída | Agente de dados | Room, seed, CRUD, reabertura, índices e bloqueio de sobreposição testados |
 | F03 — domínio e agregações | Não iniciado | Agente de domínio | Regras críticas cobertas por testes |
 | F04 — tela Hoje | Não iniciado | Agente de UI | CRUD vertical utilizável |
 | F05 — metas | Não iniciado | Agente de UI Metas | Cálculos e edição validados |
@@ -490,35 +490,45 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
 
 ## 9. Fase F02 — Room e persistência
 
-- [ ] **F02-01 — Implementar entidades**
+- [x] **F02-01 — Implementar entidades**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: `CategoryEntity`, `TimeEntryEntity` e `AppPreferenceEntity` implementadas com chave estável/autogerada conforme aplicável, unicidade de nome, índices de consulta e FK de registro para categoria com restrição de exclusão.
   - `CategoryEntity` com IDs estáveis.
   - `TimeEntryEntity` com FK para categoria.
   - `AppPreferenceEntity` chave/valor.
   - Índices e unicidade previstos na especificação.
 
-- [ ] **F02-02 — Seed idempotente das 12 categorias**
+- [x] **F02-02 — Seed idempotente das 12 categorias**
+  - Concluído por: /root + proprietário — 2026-09-20.
+  - Evidência: callback do Room semeia 12 categorias com IDs estáveis, cores, ordem, tipo e metas totalizando 10.000 basis points. `INSERT OR IGNORE` impede duplicação; teste instrumentado validou banco novo e reabertura no emulador API 37 e Galaxy M62.
   - Nomes, ordem, cores, tipo e basis points.
-  - Total inicial esperado: 9.950 basis points.
+  - Total inicial esperado: 10.000 basis points (100% do tempo semanal), conforme decisão do proprietário em 2026-09-20.
   - Testar banco novo e reabertura sem duplicação.
 
-- [ ] **F02-03 — Implementar DAOs**
+- [x] **F02-03 — Implementar DAOs**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: DAOs de categoria, registros e preferências fornecem CRUD, ordenação cronológica, filtros por período/categoria e busca de sobreposição `start < novoFim AND end > novoInicio`, com exclusão do próprio ID na edição. Testes instrumentados passaram no emulador API 37 e Galaxy M62.
   - CRUD de registros.
   - Listagem ordenada.
   - Filtros por período e categoria.
   - Consulta de sobreposição usando `start < novoFim AND end > novoInicio`.
   - Edição deve excluir o próprio ID da busca.
 
-- [ ] **F02-04 — Implementar repositórios e transações**
+- [x] **F02-04 — Implementar repositórios e transações**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: repositórios encapsulam os DAOs; `TimeEntryRepository` normaliza duração, valida fim posterior ao início e bloqueia sobreposição em transação. `AppExecutors` centraliza trabalho de banco e oferece encerramento controlado. Testes instrumentados passaram no emulador API 37 e Galaxy M62.
   - DAO não deve ser chamado diretamente pela UI.
   - Validar duração e sobreposição na fronteira de persistência.
   - ExecutorService central e encerramento controlado.
 
-- [ ] **F02-05 — Migrações**
+- [x] **F02-05 — Migrações**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: schema Room v1 exportado e empacotado nos testes; teste instrumentado cria e valida a versão inicial. O build executa `verifyNoDestructiveRoomMigration`, que falha se código de produção introduzir `fallbackToDestructiveMigration`. Testes passaram no emulador API 37 e Galaxy M62.
   - Exportar schemas Room para diretório versionado.
   - Adicionar teste de migração inicial.
   - Proibir `fallbackToDestructiveMigration` em build publicado.
 
-**Gate F02:** testes instrumentados provam seed, CRUD, índices, reabertura e bloqueio de sobreposição.
+**Gate F02:** concluído em 2026-09-20. Testes instrumentados provam seed, CRUD, índices, reabertura e bloqueio de sobreposição no emulador API 37 e Galaxy M62.
 
 ## 10. Fase F03 — domínio e cálculos
 
@@ -803,6 +813,11 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F02-05 | Concluída | Schema v1 e teste de migração inicial; proteção contra migração destrutiva; validação no emulador API 37 e Galaxy M62 | pendente neste commit |
+| 2026-09-20 | /root | F02-04 | Concluída | Repositórios, transação de escrita, validação de duração/sobreposição e executor central validados no emulador API 37 e Galaxy M62 | `81743b0` |
+| 2026-09-20 | /root | F02-03 | Concluída | CRUD, ordenação, filtros e sobreposição/exclusão do próprio ID validados no emulador API 37 e Galaxy M62 | `b9127a9` |
+| 2026-09-20 | /root + proprietário | F02-02 | Concluída | Seed de 12 categorias, soma de 10.000 basis points e reabertura sem duplicação validados em emulador API 37 e Galaxy M62 | `48b1713` |
+| 2026-09-20 | /root | F02-01 | Concluída | Entidades Room com unicidade, FK e índices; `test` e `lintDebug` passaram | `970e0e1` |
 | 2026-09-20 | /root + proprietário | F01 | Concluída | Wrapper/AGP com JVM 17; `assembleDebug`, `test` e `lintDebug` passaram sem issues; `MainActivity` aberta no emulador API 37 e Galaxy M62 Android 13/API 33 | `6762eae` |
 | 2026-09-19 18:14 | /root | F00-06 | Concluída | ADR-003 aceito: AndroidPlot 1.6.0 selecionado após spike de origem, licença e compatibilidade; MPAndroidChart descartado | ainda não criado |
 | 2026-09-19 18:14 | /root + proprietário | F00-05 | Concluída | ADR-002 aceito: applicationId, distribuição local e política de upload key definidos | ainda não criado |
