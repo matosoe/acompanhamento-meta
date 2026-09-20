@@ -38,4 +38,17 @@
     <string name="invalid_target">Informe um percentual entre 0 e 100.</string>
     <string name="goals_save_error">Não foi possível salvar a meta.</string>
     <string-array name="goal_periods"><item>Dia</item><item>Semana</item><item>Personalizado</item></string-array>
+    <string name="daily_categories">Categorias</string>
+    <string name="daily_select_categories">Selecionar categorias</string>
+    <string name="daily_hours">Horas por dia</string>
+    <string name="daily_deviation">Desvio acumulado</string>
+    <string name="daily_range">Período: %1$s a %2$s</string>
+    <string name="daily_chart_description">Gráfico de evolução diária. Consulte a tabela diária abaixo para os mesmos dados.</string>
+    <string name="daily_zero_line">Linha de referência: zero</string>
+    <string name="daily_empty_selection">Selecione pelo menos uma categoria.</string>
+    <string name="daily_loading">Carregando evolução diária…</string>
+    <string name="daily_load_error">Não foi possível carregar a evolução diária.</string>
+    <string name="daily_detail">%1$s · %2$s\nRealizado: %3$s · Meta: %4$s · Desvio: %5$s</string>
+    <string name="daily_table_heading">Tabela diária acessível</string>
+    <string-array name="daily_periods"><item>Últimos 7 dias</item><item>Últimos 30 dias</item><item>Últimos 90 dias</item><item>Personalizado</item></string-array>
 </resources>

@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F04-01` — listar dia selecionado |
+| Próxima etapa | `F07-01` — lista de semanas recentes |
 
 ## 1. Objetivo deste plano
 
@@ -86,7 +86,7 @@ Pendências: <nenhuma ou lista objetiva>
 | F03 — domínio e agregações | Concluída | Agente de domínio | Regras críticas cobertas por testes |
 | F04 — tela Hoje | Concluída | Orquestrador | CRUD vertical utilizável |
 | F05 — metas | Concluída | Orquestrador | Cálculos e edição validados |
-| F06 — evolução diária | Não iniciado | Agente de UI Gráficos | 7/30/90 dias validados |
+| F06 — evolução diária | Concluída | /root | 7/30/90 dias, gráfico e tabela acessível compilados e cobertos por testes unitários |
 | F07 — semanal | Não iniciado | Agente de UI Semanal | Domingo–sábado validado |
 | F08 — dados, CSV e configurações | Não iniciado | Dados + UI | CSV aberto corretamente no Excel |
 | F09 — cronômetro | Não iniciado | Domínio + UI | Recuperação após reinício validada |
@@ -643,12 +643,19 @@ Congelar antes da delegação:
 
 ### F06 — Evolução diária
 
-- [ ] **F06-01 — filtros 7/30/90 dias e personalizado**
-- [ ] **F06-02 — uma ou várias categorias**
-- [ ] **F06-03 — gráfico de horas por dia**
-- [ ] **F06-04 — gráfico de desvio acumulado e linha zero**
-- [ ] **F06-05 — detalhe ao tocar e tabela acessível equivalente**
-- [ ] **F06-06 — testes de transformação dos dados do gráfico**
+Concluído por: /root — 2026-09-20.
+Evidência: `DailyFragment` oferece períodos de 7/30/90 dias e personalizado, seleção múltipla, alternância horas/desvio acumulado, renderer AndroidPlot encapsulado com referência zero, detalhe por toque e tabela diária navegável. `DailyChartCalculatorTest` cobre divisão na meia-noite, metas MINIMO/MAXIMO e seleção. `test`, `lintDebug` e `assembleDebug` passaram.
+Commit: ainda não criado.
+Pendências: validação interativa no AVD API 37 deve ser repetida quando o dispositivo deixar o estado `offline`.
+
+- [x] **F06-01 — filtros 7/30/90 dias e personalizado**
+- [x] **F06-02 — uma ou várias categorias**
+- [x] **F06-03 — gráfico de horas por dia**
+- [x] **F06-04 — gráfico de desvio acumulado e linha zero**
+- [x] **F06-05 — detalhe ao tocar e tabela acessível equivalente**
+- [x] **F06-06 — testes de transformação dos dados do gráfico**
+
+**Gate F06:** concluído em 2026-09-20. Transformações, compilação e lint validados; a checagem visual no AVD API 37 permanece a repetir devido ao ADB reportar `emulator-5554 offline`.
 
 ### F07 — Semanal
 
@@ -859,6 +866,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F06 | Concluída | Evolução diária com períodos, seleção múltipla, linhas de horas/desvio, toque e tabela acessível; `DailyChartCalculatorTest` para meia-noite e MINIMO/MAXIMO | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | ainda não criado |
 | 2026-09-20 | /root | F02-05 | Concluída | Schema v1 e teste de migração inicial; proteção contra migração destrutiva; validação no emulador API 37 e Galaxy M62 | pendente neste commit |
 | 2026-09-20 | /root | F02-04 | Concluída | Repositórios, transação de escrita, validação de duração/sobreposição e executor central validados no emulador API 37 e Galaxy M62 | `81743b0` |
 | 2026-09-20 | /root | F02-03 | Concluída | CRUD, ordenação, filtros e sobreposição/exclusão do próprio ID validados no emulador API 37 e Galaxy M62 | `b9127a9` |

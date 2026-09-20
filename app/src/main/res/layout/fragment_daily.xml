@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="16dp">
+    <Spinner android:id="@+id/daily_period" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/daily_custom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/custom_period"/>
+    <Button android:id="@+id/daily_categories" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/daily_select_categories"/>
+    <RadioGroup android:id="@+id/daily_mode" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <RadioButton android:id="@+id/daily_deviation" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/daily_deviation" android:checked="true"/>
+        <RadioButton android:id="@+id/daily_hours" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/daily_hours"/>
+    </RadioGroup>
+    <TextView android:id="@+id/daily_range" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="4dp"/>
+    <TextView android:id="@+id/daily_categories_summary" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/daily_zero" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/daily_zero_line"/>
+    <com.androidplot.xy.XYPlot android:id="@+id/daily_chart" android:layout_width="match_parent" android:layout_height="220dp" android:contentDescription="@string/daily_chart_description"/>
+    <TextView android:id="@+id/daily_detail" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="8dp"/>
+    <TextView android:id="@+id/daily_error" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@android:color/holo_red_dark"/>
+    <TextView android:id="@+id/daily_table_heading" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/daily_table_heading" android:textStyle="bold"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/daily_table" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:contentDescription="@string/daily_table_heading"/>
+</LinearLayout>
