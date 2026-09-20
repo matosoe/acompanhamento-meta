@@ -29,6 +29,10 @@ As metas são snapshots por trimestre operacional, não valores históricos mut�
 
 Ao alterar uma meta, a alteração vale somente para o trimestre operacional atual. Trimestres encerrados permanecem imutáveis. Ao abrir um trimestre novo, o aplicativo cria seus snapshots a partir dos valores vigentes no trimestre anterior; alterações posteriores atingem apenas o novo trimestre.
 
+### Soma das metas
+
+As metas iniciais das categorias somam sempre 10.000 basis points (100%). Elas representam a totalidade do tempo disponível em uma semana, e não devem iniciar em 99,5%. Esta decisão substitui a observação conflitante da especificação e o valor anteriormente previsto no plano.
+
 ### Fuso e intervalos
 
 Todos os cálculos de dias, semanas e trimestres usam o fuso local do aparelho. Os intervalos internos são semiabertos: `[início, fim)`.
@@ -43,3 +47,4 @@ O cronômetro está fora do MVP. A F09 não será executada para a primeira vers
 - Cálculos e exportação devem usar o identificador semanal definido acima, mesmo que o primeiro dia de exibição seja configurável.
 - O formulário de registros e o CSV V1 não terão campo de observação.
 - A navegação, os testes e a matriz de aceite não incluirão cronômetro no MVP.
+- O seed de categorias e suas validações devem exigir soma de 10.000 basis points.

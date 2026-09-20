@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F02-02` — seed idempotente das 12 categorias |
+| Próxima etapa | `F02-03` — implementar DAOs |
 
 ## 1. Objetivo deste plano
 
@@ -498,9 +498,11 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
   - `AppPreferenceEntity` chave/valor.
   - Índices e unicidade previstos na especificação.
 
-- [ ] **F02-02 — Seed idempotente das 12 categorias**
+- [x] **F02-02 — Seed idempotente das 12 categorias**
+  - Concluído por: /root + proprietário — 2026-09-20.
+  - Evidência: callback do Room semeia 12 categorias com IDs estáveis, cores, ordem, tipo e metas totalizando 10.000 basis points. `INSERT OR IGNORE` impede duplicação; teste instrumentado validou banco novo e reabertura no emulador API 37 e Galaxy M62.
   - Nomes, ordem, cores, tipo e basis points.
-  - Total inicial esperado: 9.950 basis points.
+  - Total inicial esperado: 10.000 basis points (100% do tempo semanal), conforme decisão do proprietário em 2026-09-20.
   - Testar banco novo e reabertura sem duplicação.
 
 - [ ] **F02-03 — Implementar DAOs**
@@ -805,7 +807,8 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
-| 2026-09-20 | /root | F02-01 | Concluída | Entidades Room com unicidade, FK e índices; `test` e `lintDebug` passaram | pendente neste commit |
+| 2026-09-20 | /root + proprietário | F02-02 | Concluída | Seed de 12 categorias, soma de 10.000 basis points e reabertura sem duplicação validados em emulador API 37 e Galaxy M62 | pendente neste commit |
+| 2026-09-20 | /root | F02-01 | Concluída | Entidades Room com unicidade, FK e índices; `test` e `lintDebug` passaram | `970e0e1` |
 | 2026-09-20 | /root + proprietário | F01 | Concluída | Wrapper/AGP com JVM 17; `assembleDebug`, `test` e `lintDebug` passaram sem issues; `MainActivity` aberta no emulador API 37 e Galaxy M62 Android 13/API 33 | `6762eae` |
 | 2026-09-19 18:14 | /root | F00-06 | Concluída | ADR-003 aceito: AndroidPlot 1.6.0 selecionado após spike de origem, licença e compatibilidade; MPAndroidChart descartado | ainda não criado |
 | 2026-09-19 18:14 | /root + proprietário | F00-05 | Concluída | ADR-002 aceito: applicationId, distribuição local e política de upload key definidos | ainda não criado |
