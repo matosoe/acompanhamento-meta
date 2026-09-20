@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-19 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F00-02` — criar as instruções do projeto para agentes |
+| Próxima etapa | `F00-04` — resolver ambiguidades funcionais em ADR-001 |
 
 ## 1. Objetivo deste plano
 
@@ -387,9 +387,9 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
   - Preservar alterações do usuário.
   - Agente não altera arquivo fora de seu escopo.
 
-- [ ] **F00-03 — Criar configuração e agentes do Codex**
-  - Em andamento por: /root — 2026-09-19 18:14. Escopo concluído: arquivos de configuração e quatro perfis de agentes.
-  - Evidência parcial: `.codex/config.toml` habilita até três subagentes simultâneos; os perfis `android-architect`, `data-domain`, `feature-ui` e `qa-reviewer` definem os três campos obrigatórios e não fixam modelo. A validação por delegação em interface fica pendente.
+- [x] **F00-03 — Criar configuração e agentes do Codex**
+  - Concluído por: /root — 2026-09-19 18:14.
+  - Evidência: `.codex/config.toml` habilita até três subagentes simultâneos; os perfis `android-architect`, `data-domain`, `feature-ui` e `qa-reviewer` definem os três campos obrigatórios e não fixam modelo. Delegação somente leitura ao `qa-reviewer` inspecionou `AGENTS.md`, especificação, plano e todos os TOMLs; confirmou campos, escopo Java/XML/offline e ausência de divergências bloqueantes.
   - Commit da configuração: `cb2a77a` (`docs: add project agent guidance`).
   - Criar `.codex/config.toml` e os quatro agentes previstos.
   - Fazer uma delegação curta e somente leitura para validar a configuração.
@@ -787,6 +787,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-19 18:14 | /root + qa-reviewer | F00-03 | Concluída | Delegação somente leitura confirmou configuração habilitada, limite 3 e quatro perfis TOML alinhados a `AGENTS.md` | ainda não criado |
 | 2026-09-19 18:14 | /root | F00-03 | Parcial | Configuração e quatro agentes TOML criados; falta validar uma delegação curta em interface | `cb2a77a` |
 | 2026-09-19 18:14 | /root | F00-02 | Concluída | `AGENTS.md` criado com arquitetura, segurança, domínio e qualidade alinhados à especificação | `cb2a77a` |
 | 2026-09-19 18:14 | /root | F00-01 | Concluída | `.gitignore` Android/Java/VS Code criado; documentação não é ignorada; remoto `origin/master` ausente | `0361f29` |
