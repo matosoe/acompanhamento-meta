@@ -11,8 +11,8 @@
 | Versão do plano | 1.1 |
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-19 |
-| Estado geral | Não iniciado |
-| Próxima etapa | `PRE-01` — instalar Android Studio e SDK; depois instalar JDK 27 lado a lado |
+| Estado geral | Em andamento |
+| Próxima etapa | `F00-01` — criar o primeiro checkpoint Git |
 
 ## 1. Objetivo deste plano
 
@@ -79,7 +79,7 @@ Pendências: <nenhuma ou lista objetiva>
 
 | Fase | Estado | Responsável | Gate de saída |
 |---|---|---|---|
-| PRE — ambiente e acessos | Não iniciado | Proprietário + orquestrador | Toolchain verificada |
+| PRE — ambiente e acessos | Em andamento | Proprietário + orquestrador | Toolchain verificada |
 | F00 — governança e decisões | Não iniciado | Orquestrador | ADRs aprovados |
 | F01 — bootstrap Android | Não iniciado | Arquiteto Android | `assembleDebug`, testes e lint passam |
 | F02 — dados locais | Não iniciado | Agente de dados | Room e CRUD testados |
@@ -177,7 +177,7 @@ Auditoria executada em 2026-09-19 no Windows:
 | Git | Obrigatória | Instalado: 2.49.0 | Pode atualizar; versão atual já atende |
 | VS Code | Obrigatória para este fluxo | Instalado: 1.138.0 x64 | Manter atualizado |
 | Extensão Codex/OpenAI | Obrigatória | `openai.chatgpt` instalada | Confirmar login e acesso aos agentes |
-| Java/JDK geral | Solicitada pelo proprietário | Oracle JDK 21.0.7 instalado | Instalar JDK 27, a versão GA mais recente em 2026-09-19, lado a lado |
+| Java/JDK geral | Solicitada pelo proprietário | OpenJDK 27 GA instalado para os terminais; Oracle JDK 21.0.7 preservado lado a lado | Nenhuma ação no PRE-01A; isolar o Gradle no PRE-03 |
 | JDK do build Android | Obrigatória | Ainda depende do Android Studio | Usar o JBR/JDK 17 suportado pelo AGP 9.4; não executar Gradle em JDK 27 |
 | Extension Pack for Java | Recomendada | Instalada | Nenhuma ação |
 | Gradle for Java | Recomendada | Instalada | Nenhuma ação |
@@ -191,20 +191,28 @@ Auditoria executada em 2026-09-19 no Windows:
 
 ### 5.1 Instalações obrigatórias
 
-- [ ] **PRE-01 — Instalar Android Studio estável**
+- [x] **PRE-01 — Instalar Android Studio estável**
+  - Concluído por: /root — 2026-09-19 17:43.
+  - Evidência: Android Studio 2026.1.4 Patch 1 instalado em `C:\Program Files\Android\Android Studio`; instalador oficial validado por SHA-256 (`07fb2a6d54d14b137e2a5db274ba0e70be9291eb4245707f53164bb30cd69e95`). O Setup Wizard foi concluído pelo proprietário. O SDK Manager instalou Platform `android-37.0`, Build Tools `36.0.0`, Platform Tools e Emulator; `adb version` retornou `1.0.41` / `37.0.1-15733141`.
   - Baixar do site oficial Android Developers.
   - Instalar Android Studio, Android SDK e Android Virtual Device.
   - Aceitar apenas licenças oficiais apresentadas pelo SDK Manager.
   - Evidência: Android Studio abre e o SDK Manager lista componentes instalados.
 
-- [ ] **PRE-01A — Instalar o Java mais recente lado a lado**
+- [x] **PRE-01A — Instalar o Java mais recente lado a lado**
+  - Concluído por: /root — 2026-09-19 17:54.
+  - Evidência: build GA oficial OpenJDK 27+35 para Windows x64, sob GPLv2 com Classpath Exception, instalado no perfil local do usuário e validado pelo SHA-256 oficial (`41172837168dd25a8d9fe5eb253ac1efc568c5f9ff608144bcacadfdf50f876c`). Novos terminais Windows PowerShell e PowerShell 7 retornam `openjdk 27 2026-09-15` e `javac 27`; o Oracle JDK 21.0.7 continua acessível em sua instalação original. `JAVA_HOME` e `PATH` foram registrados apenas no ambiente/perfil local, fora do repositório; `STUDIO_JDK` permanece indefinido.
+  - Commit: ainda não criado.
+  - Pendências: configurar e provar o JDK do Gradle somente no PRE-03, quando houver wrapper do projeto.
   - Instalar JDK 27 GA, lançado em 2026-09-15, sem remover inicialmente o JDK 21 existente.
   - Preferir uma distribuição OpenJDK 27 adequada ao uso pretendido ou Oracle JDK 27 após revisar sua licença.
   - Fazer `java -version` apontar para o JDK 27 somente para uso geral no terminal.
   - Não usar JDK 27 para iniciar o Android Studio nem para executar o Gradle deste projeto enquanto a matriz oficial não declarar suporte.
   - Evidência: `java -version` informa 27 e o caminho da instalação fica registrado localmente, sem ser versionado.
 
-- [ ] **PRE-02 — Instalar componentes pelo SDK Manager**
+- [x] **PRE-02 — Instalar componentes pelo SDK Manager**
+  - Concluído por: /root — 2026-09-19 18:14.
+  - Evidência: SDK em `C:\Users\eduar\AppData\Local\Android\Sdk` contém Platform `android-37.0`, Build Tools `36.0.0`, Platform Tools `37.0.1`, Emulator `37.1.11`, Command-line Tools latest `23.0.0` e imagem Google APIs x86_64 `android-37.0`. `adb version` retornou `1.0.41` / `37.0.1-15733141`; `sdkmanager --list` listou os componentes instalados.
   - Android SDK Platform estável escolhida para `compileSdk`/`targetSdk`.
   - Android SDK Build-Tools correspondente.
   - Android SDK Platform-Tools.
@@ -213,7 +221,10 @@ Auditoria executada em 2026-09-19 no Windows:
   - Uma system image com Google APIs para o AVD.
   - Evidência: `adb version` e `sdkmanager --list` funcionam, diretamente ou por caminho absoluto.
 
-- [ ] **PRE-03 — Isolar os JDKs e configurar variáveis do Windows**
+- [x] **PRE-03 — Isolar os JDKs e configurar variáveis do Windows**
+  - Concluído por: /root — 2026-09-19 18:14.
+  - Evidência: `ANDROID_HOME` e `ANDROID_SDK_ROOT` do usuário apontam para `C:\Users\eduar\AppData\Local\Android\Sdk`; `platform-tools` foi acrescentado ao `PATH` do usuário; `STUDIO_JDK` do usuário está ausente; `java --version` e `javac --version` continuam em 27. O Temurin 17.0.20.1 foi instalado lado a lado para ferramentas Android/Gradle, sem alterar `JAVA_HOME` global. O arquivo local e ignorado `.gradle/config.properties` define `java.home` como JDK 17 para o macro `GRADLE_LOCAL_JAVA_HOME`. Gradle 9.7.1 temporário, validado por SHA-256 oficial, retornou Launcher/Daemon JVM 17.0.20.1.
+  - Seguimento obrigatório em F01: depois de gerar e versionar o wrapper, executar `gradlew --version` para comprovar que ele resolve a mesma configuração. O JBR entregue pelo Android Studio instalado é Java 25, portanto não foi usado como JDK 17.
   - Definir `ANDROID_HOME` ou `ANDROID_SDK_ROOT` conforme orientação da versão instalada.
   - Adicionar `platform-tools` ao `PATH`.
   - Permitir que o terminal geral use o JDK 27 solicitado pelo proprietário.
@@ -221,9 +232,11 @@ Auditoria executada em 2026-09-19 no Windows:
   - Não definir `STUDIO_JDK`; o Android Studio deve usar o JBR que acompanha a instalação.
   - Alinhar a configuração Gradle JDK do Android Studio com o JDK 17 usado pelo wrapper.
   - Não codificar caminhos pessoais em arquivos versionados.
-  - Evidência: novo PowerShell encontra `java` 27, `javac` 27 e `adb`; `gradlew --version` comprova JVM 17.
+  - Evidência: novo PowerShell deve encontrar `java` 27, `javac` 27 e `adb` após reiniciar o terminal; o wrapper de F01 deverá comprovar JVM 17.
 
-- [ ] **PRE-04 — Preparar o Galaxy M62 como aparelho principal**
+- [x] **PRE-04 — Preparar o Galaxy M62 como aparelho principal**
+  - Concluído por: /root — 2026-09-19 18:14.
+  - Evidência: aparelho Samsung Galaxy M62 conectado e autorizado pelo ADB no estado `device`. Propriedades registradas sem identificador: fabricante `samsung`, modelo `SM-M625F`, Android `13` (API `33`), tela física `1080x2400`, densidade `450` dpi.
   - Usar o Samsung Galaxy M62 como aparelho físico principal de desenvolvimento e homologação.
   - No aparelho: `Configurações > Sobre o telefone > Informações do software`; tocar repetidamente em `Número da compilação` até o aparelho confirmar o modo de desenvolvedor.
   - Ativar `Depuração USB` apenas durante desenvolvimento e aceitar a chave RSA deste computador.
@@ -244,14 +257,18 @@ adb shell wm density
   - Após os testes, desativar a depuração USB quando ela não estiver sendo usada.
   - Evidência: Galaxy M62 aparece em `adb devices` e suas versões reais estão registradas no diário de execução.
 
-- [ ] **PRE-04A — Criar AVDs complementares**
+- [x] **PRE-04A — Criar AVDs complementares**
+  - Concluído por: /root — 2026-09-19 18:14.
+  - Evidência: virtualização do Windows detectada; AVDs Pixel 5 `controle_horas_api26` (Google APIs, Android 8.0/API 26) e `controle_horas_api37` (Google APIs, Android 17/API 37) criados. Cada um foi iniciado sem janela e apareceu isoladamente em `adb devices` como `emulator-5554\tdevice`; ambos foram encerrados via ADB após a validação.
   - Verificar virtualização na BIOS/UEFI e no Windows.
   - Criar um AVD no API 26 para testar o `minSdk`.
   - Criar um AVD no API estável mais recente suportado pelo toolchain.
   - O Galaxy M62 cobre o uso real; os AVDs cobrem os extremos da matriz de compatibilidade.
   - Evidência: ambos os AVDs inicializam e aparecem em `adb devices` como `device`, não `offline`.
 
-- [ ] **PRE-05 — Validar Codex no VS Code**
+- [x] **PRE-05 — Validar Codex no VS Code**
+  - Concluído por: /root + proprietário — 2026-09-19 18:14.
+  - Evidência: proprietário confirmou uso ativo do Codex no VS Code; a sessão atual leu integralmente a especificação e executou comandos no workspace. A interface, login e autorização ao workspace estão funcionais no fluxo em uso.
   - Abrir a pasta do projeto no VS Code.
   - Abrir `Codex: Open Codex Sidebar` pela paleta.
   - Confirmar login OpenAI/ChatGPT e permissão para trabalhar no workspace.
@@ -761,6 +778,15 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-19 18:14 | /root + proprietário | PRE-05 | Concluída | Proprietário confirmou uso ativo do Codex no VS Code; sessão leu a especificação e executou comandos no workspace | ainda não criado |
+| 2026-09-19 18:14 | /root | PRE-04 | Concluída | Galaxy M62 autorizado pelo ADB como `device`; Samsung SM-M625F, Android 13/API 33, 1080x2400, 450 dpi; sem registrar identificador do aparelho | ainda não criado |
+| 2026-09-19 18:14 | /root | PRE-04A | Concluída | AVDs Pixel 5 API 26 e API 37 com Google APIs criados; cada um apareceu como `device` no ADB | ainda não criado |
+| 2026-09-19 18:14 | /root | PRE-03 | Concluída | SDK/ADB configurados no ambiente do usuário; JDK 17 isolado validado; `.gradle/config.properties` local configura `GRADLE_LOCAL_JAVA_HOME`; Gradle 9.7.1 confirmou JVM 17 | ainda não criado |
+| 2026-09-19 18:14 | /root | PRE-02 | Concluída | API 37, Build Tools 36, Platform Tools, Emulator, Command-line Tools 23 e imagem Google APIs API 37 validados por `sdkmanager --list` e `adb version` | ainda não criado |
+| 2026-09-19 18:14 | /root | PRE-04 e PRE-05 | Aguardam interação do proprietário | Galaxy M62 não conectado; confirmação visual da Sidebar/login/subagentes não disponível por terminal | ainda não criado |
+| 2026-09-19 17:54 | /root | PRE-01A | Concluída | OpenJDK 27+35 validado por SHA-256; `java --version` e `javac --version` aprovados em novos terminais; JDK 21 preservado; `STUDIO_JDK` ausente | ainda não criado |
+| 2026-09-19 17:43 | /root | PRE-01 | Concluída | Android Studio 2026.1.4 Patch 1 instalado; SDK Platform 37, Build Tools 36.0.0, Platform Tools e Emulator presentes; `adb version` aprovado | ainda não criado |
+| 2026-09-19 17:40 | /root | PRE-01 | Android Studio 2026.1.4 Patch 1 instalado; Setup Wizard aberto para configuração do SDK | Instalador oficial baixado de Android Developers; SHA-256 validado; `studio64.exe` em execução com título `Android Studio Setup Wizard` | ainda não criado |
 | — | — | — | Plano criado; implementação ainda não iniciada | Auditoria local registrada na seção 5 | — |
 
 ## 22. Fontes oficiais consultadas
