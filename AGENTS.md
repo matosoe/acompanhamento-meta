@@ -23,6 +23,13 @@
 - Não versione `local.properties`, `.gradle/`, keystores, senhas, caminhos pessoais ou artefatos de build.
 - Atualize o plano somente com evidência real de compilação, teste ou inspeção; não marque tarefas concluídas apenas por criar arquivos.
 
+## Git e sincronização
+
+- Use Gitflow como convenção: `master` contém apenas marcos estáveis; `develop` integra o trabalho concluído; use `feature/<id>-<resumo>` para features, `release/<versão>` para preparação de release e `hotfix/<resumo>` para correções urgentes a partir de `master`.
+- Não faça commits diretos em `master` durante desenvolvimento. Crie um commit local ao concluir cada etapa verificável e sincronize a branch de trabalho com `origin` depois da validação.
+- Use mensagens Conventional Commits concisas. Quando Codex participar materialmente do commit, acrescente o trailer `Co-authored-by: Codex <noreply@openai.com>`.
+- Não faça force-push, rebase de branch já publicada, alteração de remoto ou push de segredos sem solicitação explícita do proprietário.
+
 ## Qualidade
 
 - Crie ou atualize testes unitários para regras de negócio e testes instrumentados para Room/UI quando a tarefa os exigir.
