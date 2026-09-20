@@ -94,7 +94,7 @@ Configuração inicial baseada na linha atual de `Meta hr`:
 | Planejamento | 7min12s | 0,5% | Mínimo |
 | Treino | 17min17s | 1,2% | Máximo |
 
-Observação: os nomes, percentuais e tipos devem ser inicializados com esses valores, mas as metas precisam ser editáveis em uma tela própria. O total inicial é 99,5%; portanto, o aplicativo deve alertar quando o total não for 100%, sem impedir o salvamento.
+Observação: os nomes, percentuais e tipos devem ser inicializados com esses valores, mas as metas precisam ser editáveis em uma tela própria. O total inicial é 100%; o aplicativo deve alertar quando uma edição fizer o total ficar diferente de 100%, sem impedir o salvamento.
 
 ## 5. Regras de negócio
 
@@ -418,4 +418,3 @@ O MVP será considerado concluído quando:
 6. Gráficos diário e semanal.
 7. Exportação CSV.
 8. Testes, acessibilidade e ajustes de desempenho.
-

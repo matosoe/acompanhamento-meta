@@ -31,7 +31,7 @@ Ao alterar uma meta, a alteração vale somente para o trimestre operacional atu
 
 ### Soma das metas
 
-As metas iniciais das categorias somam sempre 10.000 basis points (100%). Elas representam a totalidade do tempo disponível em uma semana, e não devem iniciar em 99,5%. Esta decisão substitui a observação conflitante da especificação e o valor anteriormente previsto no plano.
+As metas iniciais das categorias somam sempre 10.000 basis points (100%). Elas representam a totalidade do tempo disponível em uma semana. Esta decisão confirma o total inicial de 100% adotado pela especificação e pelo plano.
 
 ### Fuso e intervalos
 

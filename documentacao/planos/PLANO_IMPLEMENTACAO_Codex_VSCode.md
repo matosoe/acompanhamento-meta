@@ -632,7 +632,7 @@ Congelar antes da delegação:
   - Commit: `8340703` + `bd622a1`.
 - [x] **F05-05 — aviso não bloqueante quando soma != 100%**
   - Concluído por: /root — 2026-09-20.
-  - Evidência: a soma de basis points é recalculada após cada edição; valores diferentes de 100% geram aviso visual sem bloquear o salvamento. Os valores concretos do seed somam 100%, apesar da observação textual conflitante da especificação.
+  - Evidência: a soma de basis points é recalculada após cada edição; valores diferentes de 100% geram aviso visual sem bloquear o salvamento. Os valores concretos do seed e a especificação somam 100%.
   - Commit: `bd622a1`.
 - [x] **F05-06 — testes de ViewModel e UI**
   - Concluído por: /root — 2026-09-20.
