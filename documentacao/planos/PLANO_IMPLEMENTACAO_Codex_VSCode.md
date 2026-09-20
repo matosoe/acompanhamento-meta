@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-19 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F00-05` — resolver identidade e distribuição em ADR-002 |
+| Próxima etapa | `F00-06` — avaliar a biblioteca de gráficos |
 
 ## 1. Objetivo deste plano
 
@@ -403,7 +403,9 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
   - Confirmar cronômetro como parte do MVP ou melhoria pós-MVP.
   - Fixar uso do fuso local e intervalos semiabertos `[início, fim)`.
 
-- [ ] **F00-05 — Resolver ADR-002: identidade e distribuição**
+- [x] **F00-05 — Resolver ADR-002: identidade e distribuição**
+  - Concluído por: /root + proprietário — 2026-09-19 18:14.
+  - Evidência: `ADR-002-distribuicao-e-identidade.md` aceito. `applicationId` fixado como `io.github.matosoe.controlehoras`; conta pessoal se houver Play; MVP limitado a desenvolvimento/homologação local por ADB; upload key fica para F11 sob responsabilidade do proprietário e fora do repositório.
   - Escolher `applicationId` definitivo antes da primeira publicação.
   - Escolher conta pessoal ou organização.
   - Definir distribuição: somente local, teste interno, Play Store ou também fora da Play.
@@ -789,6 +791,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-19 18:14 | /root + proprietário | F00-05 | Concluída | ADR-002 aceito: applicationId, distribuição local e política de upload key definidos | ainda não criado |
 | 2026-09-19 18:14 | /root + proprietário | F00-04 | Concluída | ADR-001 aceito: CSV sem observações, metas trimestrais, fuso local, semana sequencial e cronômetro fora do MVP | ainda não criado |
 | 2026-09-19 18:14 | /root + qa-reviewer | F00-03 | Concluída | Delegação somente leitura confirmou configuração habilitada, limite 3 e quatro perfis TOML alinhados a `AGENTS.md` | ainda não criado |
 | 2026-09-19 18:14 | /root | F00-03 | Parcial | Configuração e quatro agentes TOML criados; falta validar uma delegação curta em interface | `cb2a77a` |
