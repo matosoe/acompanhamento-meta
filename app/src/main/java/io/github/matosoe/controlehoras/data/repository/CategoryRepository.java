@@ -31,4 +31,8 @@ public final class CategoryRepository {
             }
         });
     }
+
+    public void update(@NonNull CategoryEntity category, @NonNull RepositoryCallback<Integer> callback) {
+        executor.execute(() -> { try { callback.onSuccess(database.categoryDao().update(category)); } catch (Throwable error) { callback.onError(error); } });
+    }
 }

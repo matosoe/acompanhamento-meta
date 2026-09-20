@@ -615,6 +615,7 @@ Congelar antes da delegação:
 ### F05 — Metas
 
 - [ ] **F05-01 — período dia/semana/personalizado**
+  - Em andamento por: /root — 2026-09-20. Escopo: tela Metas, cálculos por período, edição das metas e testes de UI/ViewModel.
 - [ ] **F05-02 — meta, realizado, percentuais, desvios e situação**
 - [ ] **F05-03 — horas registradas e não classificadas**
 - [ ] **F05-04 — edição de target basis points e tipo**

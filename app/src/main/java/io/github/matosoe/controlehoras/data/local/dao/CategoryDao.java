@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface CategoryDao {
 
     @Query("SELECT * FROM categories ORDER BY displayOrder ASC")
     List<CategoryEntity> getAllOrdered();
+
+    @Update
+    int update(CategoryEntity category);
 }
