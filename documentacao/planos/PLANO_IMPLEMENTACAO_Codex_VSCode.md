@@ -10,9 +10,9 @@
 | Documento-base | `especificacao_app_controle_investimento_horas.md` |
 | Versão do plano | 1.1 |
 | Criado em | 2026-09-19 |
-| Última atualização | 2026-09-19 |
+| Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F01-01` — gerar o projeto Android |
+| Próxima etapa | `F02-01` — implementar entidades Room |
 
 ## 1. Objetivo deste plano
 
@@ -81,7 +81,7 @@ Pendências: <nenhuma ou lista objetiva>
 |---|---|---|---|
 | PRE — ambiente e acessos | Em andamento | Proprietário + orquestrador | Toolchain verificada |
 | F00 — governança e decisões | Concluída | Orquestrador | ADRs aprovados |
-| F01 — bootstrap Android | Não iniciado | Arquiteto Android | `assembleDebug`, testes e lint passam |
+| F01 — bootstrap Android | Concluída | Arquiteto Android | `assembleDebug`, testes e lint passam; app aberto em emulador e Galaxy M62 |
 | F02 — dados locais | Não iniciado | Agente de dados | Room e CRUD testados |
 | F03 — domínio e agregações | Não iniciado | Agente de domínio | Regras críticas cobertas por testes |
 | F04 — tela Hoje | Não iniciado | Agente de UI | CRUD vertical utilizável |
@@ -423,7 +423,9 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
 
 ## 8. Fase F01 — bootstrap Android
 
-- [ ] **F01-01 — Gerar projeto**
+- [x] **F01-01 — Gerar projeto**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: projeto Java/Views/XML criado com `applicationId` `io.github.matosoe.controlehoras`, `minSdk 26`, `compileSdk/targetSdk 37`, AGP 9.4, wrapper Gradle 9.6 e compilação Java 17.
   - Aplicativo Android nativo, Java, Views/XML.
   - `minSdk 26`.
   - Baseline verificada em 2026-09-19: AGP 9.4, Gradle Wrapper 9.6, JDK/JBR 17 para o build e API máxima 37.
@@ -432,7 +434,9 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
   - Gradle Wrapper versionado; nunca depender de Gradle global.
   - JDK 27 pode permanecer como Java global, mas não deve ser usado para executar o Gradle enquanto o Gradle/AGP não o suportarem oficialmente.
 
-- [ ] **F01-02 — Configurar módulos e dependências**
+- [x] **F01-02 — Configurar módulos e dependências**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: AppCompat, Material, RecyclerView, Room, Lifecycle, Navigation, AndroidPlot e dependências de teste configurados por Maven Central/Google.
   - Material Components, AppCompat e RecyclerView.
   - Room.
   - Lifecycle ViewModel/LiveData.
@@ -443,7 +447,9 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
   - Não usar APIs ou preview features do Java 27 no aplicativo; a disponibilidade de APIs no Android é determinada por `compileSdk`, `minSdk` e desugaring, não pelo JDK global.
   - Não adicionar WorkManager sem tarefa postergável real.
 
-- [ ] **F01-03 — Criar estrutura de pacotes**
+- [x] **F01-03 — Criar estrutura de pacotes**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: estrutura `data`, `domain`, `ui` e `util` criada e versionada; pacotes futuros preservados com `.gitkeep`.
 
 ```text
 app/src/main/java/<pacote>/
@@ -461,12 +467,16 @@ app/src/main/java/<pacote>/
   util/
 ```
 
-- [ ] **F01-04 — Criar shell de navegação e tema**
+- [x] **F01-04 — Criar shell de navegação e tema**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: `MainActivity`, Navigation Component, menu lateral com seis destinos placeholder e tema Material criados sem lógica de domínio nos fragments.
   - Tema claro/escuro/sistema preparado.
   - Destinos podem começar como placeholders.
   - Nenhuma lógica de negócio nos fragments.
 
-- [ ] **F01-05 — Verificar bootstrap**
+- [x] **F01-05 — Verificar bootstrap**
+  - Concluído por: /root + proprietário — 2026-09-20.
+  - Evidência: `gradlew --version` retornou Launcher/Daemon JVM 17.0.20.1; `assembleDebug`, `test` e `lintDebug` passaram sem issues. APK instalado e `MainActivity` aberta no emulador API 37 e no Galaxy M62 (Android 13/API 33).
 
 ```powershell
 .\gradlew.bat assembleDebug
@@ -474,9 +484,9 @@ app/src/main/java/<pacote>/
 .\gradlew.bat lintDebug
 ```
 
-**Gate F01:** os três comandos passam e o app abre no emulador.
+**Gate F01:** concluído em 2026-09-20. Os três comandos passam e o app abre no emulador.
 
-O gate também deve passar no Galaxy M62 conectado, e `gradlew --version` deve confirmar que o daemon usa JVM 17, não JDK 27.
+O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou JVM 17, não JDK 27.
 
 ## 9. Fase F02 — Room e persistência
 
@@ -793,6 +803,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root + proprietário | F01 | Concluída | Wrapper/AGP com JVM 17; `assembleDebug`, `test` e `lintDebug` passaram sem issues; `MainActivity` aberta no emulador API 37 e Galaxy M62 Android 13/API 33 | `6762eae` |
 | 2026-09-19 18:14 | /root | F00-06 | Concluída | ADR-003 aceito: AndroidPlot 1.6.0 selecionado após spike de origem, licença e compatibilidade; MPAndroidChart descartado | ainda não criado |
 | 2026-09-19 18:14 | /root + proprietário | F00-05 | Concluída | ADR-002 aceito: applicationId, distribuição local e política de upload key definidos | ainda não criado |
 | 2026-09-19 18:14 | /root + proprietário | F00-04 | Concluída | ADR-001 aceito: CSV sem observações, metas trimestrais, fuso local, semana sequencial e cronômetro fora do MVP | ainda não criado |
