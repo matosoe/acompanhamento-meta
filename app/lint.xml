@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- Gradle 9.6.0 is the version supported by the selected AGP 9.4 baseline. -->
+    <issue id="AndroidGradlePluginVersion" severity="ignore" />
+</lint>
