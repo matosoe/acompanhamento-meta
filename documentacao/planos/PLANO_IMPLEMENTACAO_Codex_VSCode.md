@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F02-01` — implementar entidades Room |
+| Próxima etapa | `F02-02` — seed idempotente das 12 categorias |
 
 ## 1. Objetivo deste plano
 
@@ -490,7 +490,9 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
 
 ## 9. Fase F02 — Room e persistência
 
-- [ ] **F02-01 — Implementar entidades**
+- [x] **F02-01 — Implementar entidades**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: `CategoryEntity`, `TimeEntryEntity` e `AppPreferenceEntity` implementadas com chave estável/autogerada conforme aplicável, unicidade de nome, índices de consulta e FK de registro para categoria com restrição de exclusão.
   - `CategoryEntity` com IDs estáveis.
   - `TimeEntryEntity` com FK para categoria.
   - `AppPreferenceEntity` chave/valor.
@@ -803,6 +805,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F02-01 | Concluída | Entidades Room com unicidade, FK e índices; `test` e `lintDebug` passaram | pendente neste commit |
 | 2026-09-20 | /root + proprietário | F01 | Concluída | Wrapper/AGP com JVM 17; `assembleDebug`, `test` e `lintDebug` passaram sem issues; `MainActivity` aberta no emulador API 37 e Galaxy M62 Android 13/API 33 | `6762eae` |
 | 2026-09-19 18:14 | /root | F00-06 | Concluída | ADR-003 aceito: AndroidPlot 1.6.0 selecionado após spike de origem, licença e compatibilidade; MPAndroidChart descartado | ainda não criado |
 | 2026-09-19 18:14 | /root + proprietário | F00-05 | Concluída | ADR-002 aceito: applicationId, distribuição local e política de upload key definidos | ainda não criado |
