@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F03-01` — serviço de divisão por dia |
+| Próxima etapa | `F04-01` — listar dia selecionado |
 
 ## 1. Objetivo deste plano
 
@@ -532,31 +532,31 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
 
 ## 10. Fase F03 — domínio e cálculos
 
-- [ ] **F03-01 — `PeriodSplitter`**
+- [x] **F03-01 — `PeriodSplitter`**
   - Dividir logicamente na meia-noite local.
   - Preservar registro original.
   - Evitar perda/duplicação de segundos.
   - Cobrir transições de fuso/horário de verão aplicáveis.
 
-- [ ] **F03-02 — `GoalCalculator`**
+- [x] **F03-02 — `GoalCalculator`**
   - Base de 24 h no dia completo e 168 h na semana completa conforme requisito.
   - Base exata em intervalo parcial.
   - `MINIMO`: realizado − meta.
   - `MAXIMO`: meta − realizado.
   - Manter valores reais, limitando apenas representação visual de progresso.
 
-- [ ] **F03-03 — calendário semanal**
+- [x] **F03-03 — calendário semanal**
   - Domingo–sábado como padrão.
   - Primeiro dia configurável.
   - Número/identificador calculado, nunca digitado.
   - Aplicar a decisão do ADR sobre o campo CSV `Semana`.
 
-- [ ] **F03-04 — agregações**
+- [x] **F03-04 — agregações**
   - Resumo por dia, semana, categoria e período.
   - Horas não classificadas = duração do período menos duração registrada recortada.
   - Consultas não devem duplicar agregados em tabelas.
 
-- [ ] **F03-05 — formatação**
+- [x] **F03-05 — formatação**
   - Duração `HH:mm` e horas decimais somente na apresentação.
   - CSV sempre `HH:mm:ss`.
   - Datas internas independentes de texto localizado.
