@@ -82,6 +82,16 @@ public class TimeEntryRepositoryInstrumentedTest {
         assertEquals(savedId.get().longValue(), entries.get().get(0).id);
     }
 
+    @Test
+    public void savedEntryRemainsAfterDatabaseIsReopened() {
+        AtomicReference<Long> savedId = new AtomicReference<>();
+        AtomicReference<Throwable> error = new AtomicReference<>();
+        repository.save(entry(0, 1, 1_000L, 3_000L), callback(savedId, error));
+        database.close();
+        database = AppDatabase.create(context, databaseName);
+        assertNotNull(database.timeEntryDao().getById(savedId.get()));
+    }
+
     private TimeEntryEntity entry(long id, long categoryId, long start, long end) {
         return new TimeEntryEntity(id, categoryId, start, end, 999L, null, 1L, 1L);
     }

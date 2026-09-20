@@ -28,6 +28,7 @@ public final class TodayViewModel extends AndroidViewModel {
     private final CategoryRepository categories;
     private final ZoneId zoneId = ZoneId.systemDefault();
     private final DurationFormatter durationFormatter = new DurationFormatter();
+    private final TodaySummaryCalculator summaryCalculator = new TodaySummaryCalculator();
     private LocalDate selectedDate = LocalDate.now();
 
     public TodayViewModel(@NonNull Application application) {
@@ -43,6 +44,7 @@ public final class TodayViewModel extends AndroidViewModel {
     public void showNextDay() { selectedDate = selectedDate.plusDays(1); loadSelectedDay(); }
     public void getCategories(@NonNull RepositoryCallback<List<CategoryEntity>> callback) { categories.getAllOrdered(callback); }
     public void save(@NonNull TimeEntryEntity draft, @NonNull RepositoryCallback<Long> callback) { timeEntries.save(draft, callback); }
+    public void delete(@NonNull TimeEntryEntity entry, @NonNull RepositoryCallback<Integer> callback) { timeEntries.delete(entry, callback); }
     public void refresh() { loadSelectedDay(); }
     public long getSelectedDayStartMillis() { return selectedDate.atStartOfDay(zoneId).toInstant().toEpochMilli(); }
 
@@ -58,7 +60,8 @@ public final class TodayViewModel extends AndroidViewModel {
                 timeEntries.getForPeriod(start, end, null, new RepositoryCallback<List<TimeEntryEntity>>() {
                     @Override public void onSuccess(List<TimeEntryEntity> entries) {
                         if (!requestedDate.equals(selectedDate)) return;
-                        state.postValue(new TodayUiState(requestedDate, mapEntries(entries, names), false, ""));
+                        state.postValue(new TodayUiState(requestedDate, mapEntries(entries, names), false, "",
+                                summaryCalculator.calculate(entries, start, end, names)));
                     }
 
                     @Override public void onError(Throwable error) { publishError(requestedDate); }
@@ -72,7 +75,7 @@ public final class TodayViewModel extends AndroidViewModel {
     private void publishError(@NonNull LocalDate requestedDate) {
         if (requestedDate.equals(selectedDate)) {
             state.postValue(new TodayUiState(requestedDate, new ArrayList<>(), false,
-                    "Não foi possível carregar os lançamentos."));
+                    "Não foi possível carregar os lançamentos.", null));
         }
     }
 

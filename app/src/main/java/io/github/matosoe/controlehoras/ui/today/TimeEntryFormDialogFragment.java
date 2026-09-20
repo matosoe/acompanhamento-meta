@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import io.github.matosoe.controlehoras.R;
+import io.github.matosoe.controlehoras.domain.service.DurationFormatter;
 
 /** Collects activity fields and returns the raw values to TodayFragment for persistence. */
 public final class TimeEntryFormDialogFragment extends DialogFragment {
@@ -27,6 +29,7 @@ public final class TimeEntryFormDialogFragment extends DialogFragment {
     private static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private long start, end;
     private Button startButton, endButton;
+    private TextView durationView, validationView;
 
     static TimeEntryFormDialogFragment create(long[] categoryIds, String[] categoryNames, @Nullable TodayEntryItem entry, long defaultStart) {
         Bundle arguments = new Bundle();
@@ -42,7 +45,8 @@ public final class TimeEntryFormDialogFragment extends DialogFragment {
 
     @NonNull @Override public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Bundle args = requireArguments();
-        start = args.getLong(ARG_START); end = args.getLong(ARG_END);
+        start = savedInstanceState == null ? args.getLong(ARG_START) : savedInstanceState.getLong(ARG_START);
+        end = savedInstanceState == null ? args.getLong(ARG_END) : savedInstanceState.getLong(ARG_END);
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_time_entry_form, null);
         Spinner category = view.findViewById(R.id.entry_category_input);
         String[] categoryNames = args.getStringArray(ARG_CATEGORY_NAMES);
@@ -51,6 +55,7 @@ public final class TimeEntryFormDialogFragment extends DialogFragment {
         long selectedCategory = args.getLong(ARG_CATEGORY_ID, categoryIds[0]);
         for (int i = 0; i < categoryIds.length; i++) if (categoryIds[i] == selectedCategory) { category.setSelection(i); break; }
         startButton = view.findViewById(R.id.entry_start_input); endButton = view.findViewById(R.id.entry_end_input);
+        durationView = view.findViewById(R.id.entry_duration); validationView = view.findViewById(R.id.entry_validation);
         renderDateTimes();
         startButton.setOnClickListener(v -> chooseDateTime(true)); endButton.setOnClickListener(v -> chooseDateTime(false));
         EditText note = view.findViewById(R.id.entry_note_input); note.setText(args.getString(ARG_NOTE, ""));
@@ -58,13 +63,19 @@ public final class TimeEntryFormDialogFragment extends DialogFragment {
                 .setTitle(args.getLong(ARG_ID) == 0L ? R.string.add_activity : R.string.edit_activity)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.save, null);
+        if (args.getLong(ARG_ID) != 0L) builder.setNeutralButton(R.string.delete, null);
         androidx.appcompat.app.AlertDialog dialog = builder.create();
         dialog.setOnShowListener(ignored -> dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            if (end <= start) { validationView.setText(R.string.invalid_time_range); return; }
             Bundle result = new Bundle();
             result.putLong(ARG_ID, args.getLong(ARG_ID)); result.putLong(ARG_CATEGORY_ID, categoryIds[category.getSelectedItemPosition()]);
             result.putLong(ARG_START, start); result.putLong(ARG_END, end); result.putString(ARG_NOTE, note.getText().toString().trim()); result.putLong(ARG_CREATED, args.getLong(ARG_CREATED));
             getParentFragmentManager().setFragmentResult(RESULT_KEY, result); dismiss();
         }));
+        if (args.getLong(ARG_ID) != 0L) dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL).setOnClickListener(v -> {
+            Bundle result = new Bundle(); result.putBoolean("delete", true); result.putLong(ARG_ID, args.getLong(ARG_ID));
+            getParentFragmentManager().setFragmentResult(RESULT_KEY, result); dismiss();
+        });
         return dialog;
     }
 
@@ -79,5 +90,13 @@ public final class TimeEntryFormDialogFragment extends DialogFragment {
     private void renderDateTimes() {
         startButton.setText(Instant.ofEpochMilli(start).atZone(ZoneId.systemDefault()).format(DATE_TIME));
         endButton.setText(Instant.ofEpochMilli(end).atZone(ZoneId.systemDefault()).format(DATE_TIME));
+        if (end > start) { durationView.setText(getString(R.string.duration_value, new DurationFormatter().hhMm((end - start) / 1_000L))); validationView.setText(""); }
+        else { durationView.setText(""); validationView.setText(R.string.invalid_time_range); }
+    }
+
+    @Override public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(ARG_START, start);
+        outState.putLong(ARG_END, end);
     }
 }

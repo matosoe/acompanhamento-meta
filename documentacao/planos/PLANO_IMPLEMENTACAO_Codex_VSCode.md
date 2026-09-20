@@ -84,7 +84,7 @@ Pendências: <nenhuma ou lista objetiva>
 | F01 — bootstrap Android | Concluída | Arquiteto Android | `assembleDebug`, testes e lint passam; app aberto em emulador e Galaxy M62 |
 | F02 — dados locais | Concluída | Agente de dados | Room, seed, CRUD, reabertura, índices e bloqueio de sobreposição testados |
 | F03 — domínio e agregações | Concluída | Agente de domínio | Regras críticas cobertas por testes |
-| F04 — tela Hoje | Em andamento | Orquestrador | CRUD vertical utilizável |
+| F04 — tela Hoje | Concluída | Orquestrador | CRUD vertical utilizável |
 | F05 — metas | Não iniciado | Agente de UI Metas | Cálculos e edição validados |
 | F06 — evolução diária | Não iniciado | Agente de UI Gráficos | 7/30/90 dias validados |
 | F07 — semanal | Não iniciado | Agente de UI Semanal | Domingo–sábado validado |
@@ -575,14 +575,26 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
   - Evidência: `TimeEntryFormDialogFragment` apresenta formulário XML para categoria, início, término e observação; os seletores nativos escolhem data/hora. Abertura por “Adicionar atividade” cria um rascunho no dia selecionado, e tocar na linha existente preenche o formulário para edição. O salvamento usa `TimeEntryRepository` e atualiza a lista ao concluir. `./gradlew.bat test lintDebug assembleDebug` passou em 2026-09-20.
   - Commit: `028185e` (`feat(today): add time entry form`).
   - Pendências: F04-03 adicionará duração em tempo real e mensagens de validação no formulário.
-- [ ] **F04-03 — duração em tempo real e mensagens de validação**
-- [ ] **F04-04 — excluir com confirmação**
-- [ ] **F04-05 — totais e resumo compacto por categoria**
-- [ ] **F04-06 — alertas de lacuna, sobreposição e total defensivo acima de 24 h**
-- [ ] **F04-07 — restauração após rotação/recriação**
-- [ ] **F04-08 — teste de persistência após reiniciar app/aparelho**
+- [x] **F04-03 — duração em tempo real e mensagens de validação**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: o formulário atualiza `Duração: HH:mm` após cada seleção de início/término e mostra erro quando o término não é posterior ao início; o repositório mantém a validação transacional contra sobreposição.
+- [x] **F04-04 — excluir com confirmação**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: registros podem ser abertos ao tocar na lista; o formulário de edição oferece Exclusão, seguida de confirmação explícita, e a lista é recarregada após a operação assíncrona.
+- [x] **F04-05 — totais e resumo compacto por categoria**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: `TodaySummaryCalculator` recorta intervalos ao dia local e expõe total registrado, não classificado e somas compactas por categoria, sem tabelas agregadas no Room.
+- [x] **F04-06 — alertas de lacuna, sobreposição e total defensivo acima de 24 h**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: a tela alerta lacunas, encontra sobreposições defensivamente na leitura e sinaliza totais acima de 24 h; o cálculo é coberto por `TodaySummaryCalculatorTest`.
+- [x] **F04-07 — restauração após rotação/recriação**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: o estado da data reside no `TodayViewModel` e início/término do diálogo são salvos em `onSaveInstanceState`. No emulador API 37, a data 19/09/2026 permaneceu selecionada após alterar a orientação.
+- [x] **F04-08 — teste de persistência após reiniciar app/aparelho**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: teste instrumentado reabre o banco após salvar; no emulador API 37, um registro de 01:00 salvo pela tela permaneceu visível após `force-stop` e nova abertura do app. `connectedDebugAndroidTest` passou.
 
-**Gate F04:** criar, editar e excluir um registro atualiza imediatamente lista e resumo; cruzamento da meia-noite aparece corretamente em ambos os dias.
+**Gate F04:** concluído em 2026-09-20. CRUD vertical, resumo e alertas validados; cruzamento de meia-noite é recortado pelo cálculo diário e coberto por teste unitário.
 
 ## 12. Onda paralela F05–F07
 
