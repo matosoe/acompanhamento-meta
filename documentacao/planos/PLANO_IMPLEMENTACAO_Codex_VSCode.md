@@ -722,12 +722,12 @@ Segredos de assinatura nunca podem ser enviados ao chat, commitados ou registrad
 
 | ID | Critério | Tarefas | Estado | Evidência final |
 |---|---|---|---|---|
-| AC-01 | CRUD nas 12 categorias | F02, F04 | Pendente | — |
-| AC-02 | Persistência offline após reinício | F02-05, F04-08 | Pendente | — |
-| AC-03 | Metas para qualquer período | F03, F05 | Pendente | — |
-| AC-04 | Evolução diária e desvio acumulado | F06 | Pendente | — |
-| AC-05 | Resumo domingo–sábado | F03-03, F07 | Pendente | — |
-| AC-06 | Gráfico semanal realizado/meta/desvio | F07 | Pendente | — |
+| AC-01 | CRUD nas 12 categorias | F02, F04 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
+| AC-02 | Persistência offline após reinício | F02-05, F04-08 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
+| AC-03 | Metas para qualquer período | F03, F05 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
+| AC-04 | Evolução diária e desvio acumulado | F06 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
+| AC-05 | Resumo domingo–sábado | F03-03, F07 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
+| AC-06 | Gráfico semanal realizado/meta/desvio | F07 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
 | AC-07 | CSV com seis colunas válidas | F08 | Pendente | — |
 | AC-08 | Bloqueio de sobreposição e divisão na meia-noite | F02-03, F03-01 | Pendente | — |
 | AC-09 | Sem conexão, conta ou servidor | F10-12 | Pendente | — |
