@@ -85,7 +85,7 @@ Pendências: <nenhuma ou lista objetiva>
 | F02 — dados locais | Concluída | Agente de dados | Room, seed, CRUD, reabertura, índices e bloqueio de sobreposição testados |
 | F03 — domínio e agregações | Concluída | Agente de domínio | Regras críticas cobertas por testes |
 | F04 — tela Hoje | Concluída | Orquestrador | CRUD vertical utilizável |
-| F05 — metas | Não iniciado | Agente de UI Metas | Cálculos e edição validados |
+| F05 — metas | Concluída | Orquestrador | Cálculos e edição validados |
 | F06 — evolução diária | Não iniciado | Agente de UI Gráficos | 7/30/90 dias validados |
 | F07 — semanal | Não iniciado | Agente de UI Semanal | Domingo–sábado validado |
 | F08 — dados, CSV e configurações | Não iniciado | Dados + UI | CSV aberto corretamente no Excel |
@@ -614,13 +614,32 @@ Congelar antes da delegação:
 
 ### F05 — Metas
 
-- [ ] **F05-01 — período dia/semana/personalizado**
-  - Em andamento por: /root — 2026-09-20. Escopo: tela Metas, cálculos por período, edição das metas e testes de UI/ViewModel.
-- [ ] **F05-02 — meta, realizado, percentuais, desvios e situação**
-- [ ] **F05-03 — horas registradas e não classificadas**
-- [ ] **F05-04 — edição de target basis points e tipo**
-- [ ] **F05-05 — aviso não bloqueante quando soma != 100%**
-- [ ] **F05-06 — testes de ViewModel e UI**
+- [x] **F05-01 — período dia/semana/personalizado**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: `GoalsViewModel` expõe dia, semana domingo–sábado e intervalo inclusivo escolhido por dois seletores de data; cada mudança recarrega os registros sobrepostos ao período.
+  - Commit: `bd622a1` (`feat(goals): complete goals dashboard`).
+- [x] **F05-02 — meta, realizado, percentuais, desvios e situação**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: cada categoria mostra meta e realizado em `HH:mm` e percentual, desvio em horas e pontos percentuais, além de `Atingida`/`Não atingida`, respeitando `MINIMO` e `MAXIMO`.
+  - Commit: `bd622a1`.
+- [x] **F05-03 — horas registradas e não classificadas**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: o cabeçalho apresenta totais registrados recortados ao período e a diferença não classificada sobre a duração exata do intervalo.
+  - Commit: `bd622a1`.
+- [x] **F05-04 — edição de target basis points e tipo**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: tocar em uma categoria abre edição de percentual (0–100) e tipo; `CategoryDao.update` persiste a entidade sem alteração de schema e a tela recarrega após o salvamento assíncrono.
+  - Commit: `8340703` + `bd622a1`.
+- [x] **F05-05 — aviso não bloqueante quando soma != 100%**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: a soma de basis points é recalculada após cada edição; valores diferentes de 100% geram aviso visual sem bloquear o salvamento. Os valores concretos do seed somam 100%, apesar da observação textual conflitante da especificação.
+  - Commit: `bd622a1`.
+- [x] **F05-06 — testes de ViewModel e UI**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: `GoalsViewModelInstrumentedTest` valida as 12 metas, soma e semana domingo–sábado; `GoalsFragmentInstrumentedTest` abre o destino real e verifica seletor, totais e lista. `test`, `lintDebug`, `assembleDebug` e `connectedDebugAndroidTest` passaram no emulador API 37.
+  - Commit: `bd622a1`.
+
+**Gate F05:** concluído em 2026-09-20. Cálculos, períodos, edição persistida, aviso de soma e tela foram validados.
 
 ### F06 — Evolução diária
 
