@@ -41,6 +41,10 @@ public final class TodayViewModel extends AndroidViewModel {
     @NonNull public LiveData<TodayUiState> getState() { return state; }
     public void showPreviousDay() { selectedDate = selectedDate.minusDays(1); loadSelectedDay(); }
     public void showNextDay() { selectedDate = selectedDate.plusDays(1); loadSelectedDay(); }
+    public void getCategories(@NonNull RepositoryCallback<List<CategoryEntity>> callback) { categories.getAllOrdered(callback); }
+    public void save(@NonNull TimeEntryEntity draft, @NonNull RepositoryCallback<Long> callback) { timeEntries.save(draft, callback); }
+    public void refresh() { loadSelectedDay(); }
+    public long getSelectedDayStartMillis() { return selectedDate.atStartOfDay(zoneId).toInstant().toEpochMilli(); }
 
     private void loadSelectedDay() {
         final LocalDate requestedDate = selectedDate;
@@ -78,7 +82,9 @@ public final class TodayViewModel extends AndroidViewModel {
             String start = Instant.ofEpochMilli(entry.startEpochMillis).atZone(zoneId).format(TIME_FORMAT);
             String end = Instant.ofEpochMilli(entry.endEpochMillis).atZone(zoneId).format(TIME_FORMAT);
             String category = categoryNames.get(entry.categoryId);
-            items.add(new TodayEntryItem(start + "–" + end, category == null ? "Categoria indisponível" : category, durationFormatter.hhMm(entry.durationSeconds)));
+            items.add(new TodayEntryItem(entry.id, entry.categoryId, entry.startEpochMillis, entry.endEpochMillis,
+                    entry.note == null ? "" : entry.note, entry.createdAtEpochMillis, start + "–" + end,
+                    category == null ? "Categoria indisponível" : category, durationFormatter.hhMm(entry.durationSeconds)));
         }
         return items;
     }

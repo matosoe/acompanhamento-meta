@@ -570,7 +570,11 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
   - Evidência: `TodayViewModel` mantém a data selecionada e consulta em segundo plano os intervalos sobrepostos ao dia local; `TodayFragment` observa `LiveData` e exibe uma lista cronológica com horário, categoria, duração e estado vazio. `./gradlew.bat test lintDebug assembleDebug` passou em 2026-09-20.
   - Commit: `05ebacf` (`feat(today): list entries for selected day`).
   - Pendências: F04-02 implementará o formulário e as ações da lista.
-- [ ] **F04-02 — formulário criar/editar**
+- [x] **F04-02 — formulário criar/editar**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: `TimeEntryFormDialogFragment` apresenta formulário XML para categoria, início, término e observação; os seletores nativos escolhem data/hora. Abertura por “Adicionar atividade” cria um rascunho no dia selecionado, e tocar na linha existente preenche o formulário para edição. O salvamento usa `TimeEntryRepository` e atualiza a lista ao concluir. `./gradlew.bat test lintDebug assembleDebug` passou em 2026-09-20.
+  - Commit: ainda não criado.
+  - Pendências: F04-03 adicionará duração em tempo real e mensagens de validação no formulário.
 - [ ] **F04-03 — duração em tempo real e mensagens de validação**
 - [ ] **F04-04 — excluir com confirmação**
 - [ ] **F04-05 — totais e resumo compacto por categoria**
