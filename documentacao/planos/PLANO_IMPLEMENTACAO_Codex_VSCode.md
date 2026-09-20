@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F07-01` — lista de semanas recentes |
+| Próxima etapa | `F08-01` — lista pesquisável de registros |
 
 ## 1. Objetivo deste plano
 
@@ -87,7 +87,7 @@ Pendências: <nenhuma ou lista objetiva>
 | F04 — tela Hoje | Concluída | Orquestrador | CRUD vertical utilizável |
 | F05 — metas | Concluída | Orquestrador | Cálculos e edição validados |
 | F06 — evolução diária | Concluída | /root | 7/30/90 dias, gráfico e tabela acessível compilados e cobertos por testes unitários |
-| F07 — semanal | Não iniciado | Agente de UI Semanal | Domingo–sábado validado |
+| F07 — semanal | Concluída | /root | Consolidação domingo–sábado, gráficos e testes de semanas completa/parcial |
 | F08 — dados, CSV e configurações | Não iniciado | Dados + UI | CSV aberto corretamente no Excel |
 | F09 — cronômetro | Não iniciado | Domínio + UI | Recuperação após reinício validada |
 | F10 — qualidade | Não iniciado | Agente QA | Suíte, acessibilidade e desempenho aprovados |
@@ -659,13 +659,20 @@ Pendências: validação interativa no AVD API 37 deve ser repetida quando o dis
 
 ### F07 — Semanal
 
-- [ ] **F07-01 — lista de semanas recentes**
-- [ ] **F07-02 — totais e percentuais por categoria**
-- [ ] **F07-03 — detalhe com dias e registros**
-- [ ] **F07-04 — barras Realizado versus Meta**
-- [ ] **F07-05 — linha de desvio semanal**
-- [ ] **F07-06 — filtros 4/8/12/26 semanas**
-- [ ] **F07-07 — testes para semana completa e parcial**
+Concluído por: /root — 2026-09-20.
+Evidência: `WeeklyFragment` mostra semanas recentes em ordem decrescente, detalhe de dias/registros, totais e percentuais por categoria, filtros de 4/8/12/26 semanas, barras de realizado/meta e linha de desvio. O renderer AndroidPlot continua isolado de modelos e ViewModels; a tabela semanal é a alternativa acessível. `WeeklyCalculatorTest` cobre domingo–sábado completo, intervalo parcial e tipos MINIMO/MAXIMO. `test`, `lintDebug` e `assembleDebug` passaram.
+Commit: ainda não criado.
+Pendências: validação interativa no AVD API 37 deve ser repetida quando o dispositivo deixar o estado `offline`.
+
+- [x] **F07-01 — lista de semanas recentes**
+- [x] **F07-02 — totais e percentuais por categoria**
+- [x] **F07-03 — detalhe com dias e registros**
+- [x] **F07-04 — barras Realizado versus Meta**
+- [x] **F07-05 — linha de desvio semanal**
+- [x] **F07-06 — filtros 4/8/12/26 semanas**
+- [x] **F07-07 — testes para semana completa e parcial**
+
+**Gate F07:** concluído em 2026-09-20. Semanas completas e parciais, compilação e lint validados; a checagem visual no AVD API 37 permanece a repetir devido ao ADB reportar `emulator-5554 offline`.
 
 **Gate da onda:** cada feature passa seus testes isolados; depois o orquestrador integra navegação/recursos e executa toda a suíte.
 
@@ -866,6 +873,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F07 | Concluída | Semanas domingo–sábado, categorias, detalhe, barras, desvio e filtros; testes de semana completa/parcial | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | ainda não criado |
 | 2026-09-20 | /root | F06 | Concluída | Evolução diária com períodos, seleção múltipla, linhas de horas/desvio, toque e tabela acessível; `DailyChartCalculatorTest` para meia-noite e MINIMO/MAXIMO | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `a438f6c` |
 | 2026-09-20 | /root | F02-05 | Concluída | Schema v1 e teste de migração inicial; proteção contra migração destrutiva; validação no emulador API 37 e Galaxy M62 | pendente neste commit |
 | 2026-09-20 | /root | F02-04 | Concluída | Repositórios, transação de escrita, validação de duração/sobreposição e executor central validados no emulador API 37 e Galaxy M62 | `81743b0` |

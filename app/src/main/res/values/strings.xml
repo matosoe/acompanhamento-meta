@@ -51,4 +51,17 @@
     <string name="daily_detail">%1$s · %2$s\nRealizado: %3$s · Meta: %4$s · Desvio: %5$s</string>
     <string name="daily_table_heading">Tabela diária acessível</string>
     <string-array name="daily_periods"><item>Últimos 7 dias</item><item>Últimos 30 dias</item><item>Últimos 90 dias</item><item>Personalizado</item></string-array>
+    <string name="weekly_categories">Categorias</string>
+    <string name="weekly_select_categories">Selecionar categorias</string>
+    <string name="weekly_bars">Realizado e meta</string>
+    <string name="weekly_deviation">Desvio semanal</string>
+    <string name="weekly_range">%1$s a %2$s · Semana %3$d</string>
+    <string name="weekly_total">Total registrado: %1$s</string>
+    <string name="weekly_chart_description">Gráfico semanal. A tabela textual abaixo contém os mesmos valores.</string>
+    <string name="weekly_zero_line">Linha de referência: zero</string>
+    <string name="weekly_empty_selection">Selecione pelo menos uma categoria.</string>
+    <string name="weekly_error">Não foi possível carregar o acompanhamento semanal.</string>
+    <string name="weekly_table_heading">Tabela semanal acessível</string>
+    <string name="weekly_detail_heading">Dias e registros da semana selecionada</string>
+    <string-array name="weekly_periods"><item>Últimas 4 semanas</item><item>Últimas 8 semanas</item><item>Últimas 12 semanas</item><item>Últimas 26 semanas</item></string-array>
 </resources>
