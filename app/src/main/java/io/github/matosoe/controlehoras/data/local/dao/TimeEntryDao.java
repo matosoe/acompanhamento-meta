@@ -31,6 +31,17 @@ public interface TimeEntryDao {
     List<TimeEntryEntity> getAllChronological();
 
     @Query("SELECT * FROM time_entries "
+            + "WHERE (:fromEpochMillis IS NULL OR endEpochMillis > :fromEpochMillis) "
+            + "AND (:untilEpochMillis IS NULL OR startEpochMillis < :untilEpochMillis) "
+            + "AND (:categoryId IS NULL OR categoryId = :categoryId) "
+            + "ORDER BY startEpochMillis ASC, id ASC")
+    List<TimeEntryEntity> search(
+            @Nullable Long fromEpochMillis,
+            @Nullable Long untilEpochMillis,
+            @Nullable Long categoryId
+    );
+
+    @Query("SELECT * FROM time_entries "
             + "WHERE endEpochMillis > :periodStartEpochMillis "
             + "AND startEpochMillis < :periodEndEpochMillis "
             + "AND (:categoryId IS NULL OR categoryId = :categoryId) "

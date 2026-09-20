@@ -64,4 +64,24 @@
     <string name="weekly_table_heading">Tabela semanal acessível</string>
     <string name="weekly_detail_heading">Dias e registros da semana selecionada</string>
     <string-array name="weekly_periods"><item>Últimas 4 semanas</item><item>Últimas 8 semanas</item><item>Últimas 12 semanas</item><item>Últimas 26 semanas</item></string-array>
+    <string name="export_search">Pesquisar categoria</string>
+    <string name="export_dates">Filtrar por datas</string>
+    <string name="export_all_dates">Todos os períodos</string>
+    <string name="export_filter_description">Período: %1$s</string>
+    <string name="export_all_categories">Todas as categorias</string>
+    <string name="export_save">Salvar CSV</string>
+    <string name="export_share">Compartilhar CSV</string>
+    <string name="export_summary">%1$d registros na lista e exportação</string>
+    <string name="export_saved">CSV salvo: %1$d linhas exportadas.</string>
+    <string name="export_empty">Não há registros para exportar.</string>
+    <string name="export_failed">Não foi possível exportar o CSV.</string>
+    <string name="settings_week_start">Primeiro dia da semana</string>
+    <string name="settings_duration">Formato de duração</string>
+    <string name="settings_separator">Separador CSV</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_version">Versão %1$s</string>
+    <string-array name="settings_week_start_values"><item>Domingo</item><item>Segunda-feira</item></string-array>
+    <string-array name="settings_duration_values"><item>HH:mm</item><item>Horas decimais</item></string-array>
+    <string-array name="settings_separator_values"><item>;</item><item>,</item></string-array>
+    <string-array name="settings_theme_values"><item>Sistema</item><item>Claro</item><item>Escuro</item></string-array>
 </resources>

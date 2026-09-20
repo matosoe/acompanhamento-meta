@@ -1,0 +1,11 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_week_start" android:textStyle="bold"/>
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView android:id="@+id/settings_week_start" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="none"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_duration" android:textStyle="bold"/>
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView android:id="@+id/settings_duration" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="none"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_separator" android:textStyle="bold"/>
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView android:id="@+id/settings_separator" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="none"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settings_theme" android:textStyle="bold"/>
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView android:id="@+id/settings_theme" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="none"/>
+    <TextView android:id="@+id/settings_version" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="24dp"/>
+</LinearLayout></ScrollView>

@@ -678,25 +678,27 @@ Pendências: validação interativa no AVD API 37 deve ser repetida quando o dis
 
 ## 13. Fase F08 — dados, exportação e configurações
 
-- [ ] **F08-01 — lista pesquisável de registros**
-- [ ] **F08-02 — filtros por data/categoria e ordenação**
-- [ ] **F08-03 — `CsvExporter` puro**
+Em andamento por: /root — 2026-09-20. Escopo implementado e compilado; a homologação manual no Excel/Calc ainda depende de dispositivo/aplicativo disponível.
+
+- [x] **F08-01 — lista pesquisável de registros**
+- [x] **F08-02 — filtros por data/categoria e ordenação**
+- [x] **F08-03 — `CsvExporter` puro**
   - UTF-8 com BOM.
   - Seis cabeçalhos na ordem especificada.
   - Separador configurável.
   - Escape RFC 4180.
   - Registro original ao cruzar meia-noite.
 
-- [ ] **F08-04 — Storage Access Framework**
+- [x] **F08-04 — Storage Access Framework**
   - Usuário escolhe destino.
   - Sem permissão ampla de armazenamento.
   - Nome sugerido com timestamp.
 
-- [ ] **F08-05 — compartilhamento seguro**
+- [x] **F08-05 — compartilhamento seguro**
   - Usar URI temporária/`FileProvider` somente se necessário.
   - Nunca expor caminho `file://`.
 
-- [ ] **F08-06 — configurações**
+- [x] **F08-06 — configurações**
   - Primeiro dia da semana.
   - Formato de duração.
   - Separador CSV.
@@ -711,6 +713,8 @@ Pendências: validação interativa no AVD API 37 deve ser repetida quando o dis
   - Colunas e horários preservados.
 
 **Gate F08:** arquivo exportado é byte a byte compatível com as decisões e abre corretamente em Excel/Calc.
+
+Evidência parcial: `ExportFragment` fornece pesquisa, filtros, ordenação cronológica, `ACTION_CREATE_DOCUMENT` e compartilhamento por `FileProvider`; `SettingsFragment` persiste preferências no Room. `CsvExporterTest` verifica BOM UTF-8, seis cabeçalhos, semana 253, acentos, escape RFC 4180 e preservação de registro que cruza meia-noite. `test`, `lintDebug` e `assembleDebug` passaram em 2026-09-20. Pendência: F08-07, abertura manual no Excel/Calc pt-BR; AVD API 37 estava `offline`.
 
 ## 14. Fase F09 — cronômetro
 
@@ -873,6 +877,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F08-01 a F08-06 | Implementação concluída; homologação Excel/Calc pendente | `CsvExporterTest` cobre BOM, seis colunas, RFC 4180 e meia-noite; `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline | ainda não criado |
 | 2026-09-20 | /root | F07 | Concluída | Semanas domingo–sábado, categorias, detalhe, barras, desvio e filtros; testes de semana completa/parcial | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `d88d844` |
 | 2026-09-20 | /root | F06 | Concluída | Evolução diária com períodos, seleção múltipla, linhas de horas/desvio, toque e tabela acessível; `DailyChartCalculatorTest` para meia-noite e MINIMO/MAXIMO | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `a438f6c` |
 | 2026-09-20 | /root | F02-05 | Concluída | Schema v1 e teste de migração inicial; proteção contra migração destrutiva; validação no emulador API 37 e Galaxy M62 | pendente neste commit |

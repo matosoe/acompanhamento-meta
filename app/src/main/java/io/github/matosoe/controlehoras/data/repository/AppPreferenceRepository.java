@@ -31,4 +31,14 @@ public final class AppPreferenceRepository {
             }
         });
     }
+
+    public void get(@NonNull String key, @NonNull RepositoryCallback<AppPreferenceEntity> callback) {
+        executor.execute(() -> {
+            try {
+                callback.onSuccess(database.appPreferenceDao().get(key));
+            } catch (Throwable error) {
+                callback.onError(error);
+            }
+        });
+    }
 }

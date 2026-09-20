@@ -67,6 +67,21 @@ public final class TimeEntryRepository {
         });
     }
 
+    public void search(
+            @Nullable Long fromEpochMillis,
+            @Nullable Long untilEpochMillis,
+            @Nullable Long categoryId,
+            @NonNull RepositoryCallback<List<TimeEntryEntity>> callback
+    ) {
+        executor.execute(() -> {
+            try {
+                callback.onSuccess(timeEntryDao.search(fromEpochMillis, untilEpochMillis, categoryId));
+            } catch (Throwable error) {
+                callback.onError(error);
+            }
+        });
+    }
+
     private long saveInTransaction(TimeEntryEntity draft) {
         if (draft.endEpochMillis <= draft.startEpochMillis) {
             throw new TimeEntryValidationException("O término deve ser posterior ao início.");
