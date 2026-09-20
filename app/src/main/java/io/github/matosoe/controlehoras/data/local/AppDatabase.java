@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import io.github.matosoe.controlehoras.data.local.dao.CategoryDao;
@@ -22,6 +23,7 @@ import io.github.matosoe.controlehoras.data.local.entity.TimeEntryEntity;
 )
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "controle_horas.db";
+    private static final Migration[] MIGRATIONS = new Migration[0];
     private static volatile AppDatabase instance;
 
     public abstract CategoryDao categoryDao();
@@ -43,6 +45,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     static AppDatabase create(@NonNull Context context, @NonNull String databaseName) {
         return Room.databaseBuilder(context, AppDatabase.class, databaseName)
+                .addMigrations(MIGRATIONS)
                 .addCallback(new RoomDatabase.Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase database) {

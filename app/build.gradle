@@ -22,6 +22,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    sourceSets {
+        androidTest {
+            assets.srcDirs += files("$projectDir/schemas")
+        }
+    }
 }
 
 dependencies {
@@ -40,4 +45,31 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
+    androidTestImplementation 'androidx.room:room-testing:2.8.5'
+}
+
+configurations.configureEach {
+    resolutionStrategy.force(
+            'org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1',
+            'org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.8.1',
+            'org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1',
+            'org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.8.1'
+    )
+}
+
+tasks.register('verifyNoDestructiveRoomMigration') {
+    group = 'verification'
+    description = 'Fails if production code opts into destructive Room migrations.'
+    doLast {
+        def prohibitedFiles = fileTree('src/main/java') {
+            include '**/*.java'
+        }.findAll { file -> file.getText('UTF-8').contains('fallbackToDestructiveMigration') }
+        if (!prohibitedFiles.isEmpty()) {
+            throw new GradleException('fallbackToDestructiveMigration is prohibited: ' + prohibitedFiles)
+        }
+    }
+}
+
+tasks.named('check').configure {
+    dependsOn tasks.named('verifyNoDestructiveRoomMigration')
 }
