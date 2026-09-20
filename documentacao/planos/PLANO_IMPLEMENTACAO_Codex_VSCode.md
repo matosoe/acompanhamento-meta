@@ -370,12 +370,14 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
 - [x] **F00-01 — Criar o primeiro checkpoint Git**
   - Concluído por: /root — 2026-09-19 18:14.
   - Evidência: criado `.gitignore` para artefatos Android/Java/VS Code e material de assinatura, sem regras que excluam `documentacao/`. O remoto `origin` aponta para GitHub, mas `master...origin/master [gone]` confirma que a referência remota local está inconsistente; não foi feito push nem alteração no remoto.
-  - Commit: criado neste checkpoint.
+  - Commit: `0361f29` (`chore: add Android project gitignore`).
   - Verificar o estado do remoto atualmente inconsistente.
   - Criar `.gitignore` Android/Java/VS Code sem excluir documentação.
   - Commit sugerido: `docs: add product specification and implementation plan`.
 
-- [ ] **F00-02 — Criar `AGENTS.md`**
+- [x] **F00-02 — Criar `AGENTS.md`**
+  - Concluído por: /root — 2026-09-19 18:14.
+  - Evidência: `AGENTS.md` criado com as restrições Java/XML/offline, regras de duração e sobreposição, política Room, escopo de arquivos, segredos e comandos de qualidade. Inspeção confirmou alinhamento à especificação e ao plano.
   - Java + XML; não introduzir Kotlin/Compose.
   - Segundos inteiros para duração.
   - Sem rede, login ou permissões amplas.
@@ -385,6 +387,8 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
   - Agente não altera arquivo fora de seu escopo.
 
 - [ ] **F00-03 — Criar configuração e agentes do Codex**
+  - Em andamento por: /root — 2026-09-19 18:14. Escopo concluído: arquivos de configuração e quatro perfis de agentes.
+  - Evidência parcial: `.codex/config.toml` habilita até três subagentes simultâneos; os perfis `android-architect`, `data-domain`, `feature-ui` e `qa-reviewer` definem os três campos obrigatórios e não fixam modelo. A validação por delegação em interface fica pendente.
   - Criar `.codex/config.toml` e os quatro agentes previstos.
   - Fazer uma delegação curta e somente leitura para validar a configuração.
 
@@ -781,7 +785,9 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
-| 2026-09-19 18:14 | /root | F00-01 | Concluída | `.gitignore` Android/Java/VS Code criado; documentação não é ignorada; remoto `origin/master` ausente | criado neste checkpoint |
+| 2026-09-19 18:14 | /root | F00-03 | Parcial | Configuração e quatro agentes TOML criados; falta validar uma delegação curta em interface | ainda não criado |
+| 2026-09-19 18:14 | /root | F00-02 | Concluída | `AGENTS.md` criado com arquitetura, segurança, domínio e qualidade alinhados à especificação | ainda não criado |
+| 2026-09-19 18:14 | /root | F00-01 | Concluída | `.gitignore` Android/Java/VS Code criado; documentação não é ignorada; remoto `origin/master` ausente | `0361f29` |
 | 2026-09-19 18:14 | /root + proprietário | PRE-05 | Concluída | Proprietário confirmou uso ativo do Codex no VS Code; sessão leu a especificação e executou comandos no workspace | ainda não criado |
 | 2026-09-19 18:14 | /root | PRE-04 | Concluída | Galaxy M62 autorizado pelo ADB como `device`; Samsung SM-M625F, Android 13/API 33, 1080x2400, 450 dpi; sem registrar identificador do aparelho | ainda não criado |
 | 2026-09-19 18:14 | /root | PRE-04A | Concluída | AVDs Pixel 5 API 26 e API 37 com Google APIs criados; cada um apareceu como `device` no ADB | ainda não criado |

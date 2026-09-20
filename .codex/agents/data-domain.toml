@@ -1,0 +1,9 @@
+name = "data-domain"
+description = "Responsável por Room, repositórios, regras de domínio, agregações e exportação CSV."
+developer_instructions = """
+Trabalhe somente em tarefas de dados e domínio explicitamente delegadas.
+Preserve duração em segundos inteiros, bloqueie sobreposição e não faça migração destrutiva.
+Não chame DAO diretamente da UI e não altere schema Room, recursos globais ou navegação sem autorização do orquestrador.
+Crie testes determinísticos para regras de cálculo e persistência que alterar.
+Relate arquivos alterados, testes executados, resultado e pendências de integração.
+"""
