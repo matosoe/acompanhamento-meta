@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-19 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F00-06` — avaliar a biblioteca de gráficos |
+| Próxima etapa | `F01-01` — gerar o projeto Android |
 
 ## 1. Objetivo deste plano
 
@@ -80,7 +80,7 @@ Pendências: <nenhuma ou lista objetiva>
 | Fase | Estado | Responsável | Gate de saída |
 |---|---|---|---|
 | PRE — ambiente e acessos | Em andamento | Proprietário + orquestrador | Toolchain verificada |
-| F00 — governança e decisões | Em andamento | Orquestrador | ADRs aprovados |
+| F00 — governança e decisões | Concluída | Orquestrador | ADRs aprovados |
 | F01 — bootstrap Android | Não iniciado | Arquiteto Android | `assembleDebug`, testes e lint passam |
 | F02 — dados locais | Não iniciado | Agente de dados | Room e CRUD testados |
 | F03 — domínio e agregações | Não iniciado | Agente de domínio | Regras críticas cobertas por testes |
@@ -411,7 +411,9 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
   - Definir distribuição: somente local, teste interno, Play Store ou também fora da Play.
   - Definir responsável e armazenamento seguro da upload key.
 
-- [ ] **F00-06 — Resolver ADR-003: biblioteca de gráficos**
+- [x] **F00-06 — Resolver ADR-003: biblioteca de gráficos**
+  - Concluído por: /root — 2026-09-19 18:14.
+  - Evidência: `ADR-003-biblioteca-de-graficos.md` aceito. Spike descartou MPAndroidChart por toolchain defasado/JitPack e selecionou AndroidPlot 1.6.0 (Java/XML, Apache-2.0, Maven Central); POM e AAR retornaram HTTP 200. Contrato de encapsulamento e alternativa textual registrados.
   - Fazer spike de compatibilidade Java/API/Gradle da versão disponível de MPAndroidChart.
   - Confirmar origem confiável e licença.
   - Encapsular a biblioteca atrás de componentes próprios.
@@ -791,6 +793,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-19 18:14 | /root | F00-06 | Concluída | ADR-003 aceito: AndroidPlot 1.6.0 selecionado após spike de origem, licença e compatibilidade; MPAndroidChart descartado | ainda não criado |
 | 2026-09-19 18:14 | /root + proprietário | F00-05 | Concluída | ADR-002 aceito: applicationId, distribuição local e política de upload key definidos | ainda não criado |
 | 2026-09-19 18:14 | /root + proprietário | F00-04 | Concluída | ADR-001 aceito: CSV sem observações, metas trimestrais, fuso local, semana sequencial e cronômetro fora do MVP | ainda não criado |
 | 2026-09-19 18:14 | /root + qa-reviewer | F00-03 | Concluída | Delegação somente leitura confirmou configuração habilitada, limite 3 e quatro perfis TOML alinhados a `AGENTS.md` | ainda não criado |
