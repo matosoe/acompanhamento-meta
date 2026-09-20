@@ -11,7 +11,7 @@ import io.github.matosoe.controlehoras.R;
 
 public final class DailyTableAdapter extends RecyclerView.Adapter<DailyTableAdapter.Holder> {
     private final List<String> rows = new ArrayList<>();
-    public void submit(List<String> values) { rows.clear(); rows.addAll(values); notifyDataSetChanged(); }
+    public void submit(List<String> values) { int previous=rows.size(); rows.clear(); if(previous>0) notifyItemRangeRemoved(0,previous); rows.addAll(values); if(!values.isEmpty()) notifyItemRangeInserted(0,values.size()); }
     @NonNull @Override public Holder onCreateViewHolder(@NonNull ViewGroup parent, int type) {
         return new Holder((TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_daily_table, parent, false));
     }

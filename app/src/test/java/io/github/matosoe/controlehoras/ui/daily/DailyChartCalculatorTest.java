@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.ArrayList;
 import org.junit.Test;
 import io.github.matosoe.controlehoras.data.local.entity.CategoryEntity;
 import io.github.matosoe.controlehoras.data.local.entity.TimeEntryEntity;
@@ -40,5 +41,19 @@ public class DailyChartCalculatorTest {
         DailyChartModel result = new DailyChartCalculator().calculate(Arrays.asList(category(1, "MINIMO", 100), category(2, "MINIMO", 100)),
                 Collections.emptyList(), LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 2), Collections.singleton(2L), ZONE);
         assertEquals(1, result.series.size()); assertEquals(2L, result.series.get(0).categoryId);
+    }
+    @Test public void handlesFiveYearsOfSyntheticDailyEntries() {
+        LocalDate start = LocalDate.of(2021, 1, 1), end = start.plusYears(5);
+        ArrayList<TimeEntryEntity> entries = new ArrayList<>();
+        for (LocalDate day = start; day.isBefore(end); day = day.plusDays(1)) {
+            long from = day.atTime(8, 0).atZone(ZONE).toInstant().toEpochMilli();
+            long to = day.atTime(9, 0).atZone(ZONE).toInstant().toEpochMilli();
+            entries.add(new TimeEntryEntity(entries.size() + 1L, 1, from, to, 3600, null, 0, 0));
+        }
+        DailyChartModel model = new DailyChartCalculator().calculate(Collections.singletonList(category(1, "MINIMO", 500)),
+                entries, start, end, Collections.singleton(1L), ZONE);
+        assertEquals(entries.size(), model.series.get(0).points.size());
+        assertEquals(3600, model.series.get(0).points.get(0).actualSeconds);
+        assertEquals(3600, model.series.get(0).points.get(model.series.get(0).points.size() - 1).actualSeconds);
     }
 }

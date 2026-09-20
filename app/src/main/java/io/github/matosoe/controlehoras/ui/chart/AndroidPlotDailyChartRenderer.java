@@ -1,5 +1,6 @@
 package io.github.matosoe.controlehoras.ui.chart;
 
+import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import androidx.annotation.NonNull;
 import com.androidplot.xy.BoundaryMode;
@@ -19,6 +20,7 @@ public final class AndroidPlotDailyChartRenderer implements ChartRenderer {
     private final XYPlot plot;
     public AndroidPlotDailyChartRenderer(@NonNull XYPlot plot) { this.plot = plot; }
 
+    @SuppressLint("ClickableViewAccessibility") // AndroidPlot's external XYPlot cannot override performClick; listener invokes it on ACTION_UP.
     @Override public void render(@NonNull DailyChartModel model, @NonNull DailyChartMode mode,
                                  @NonNull PointListener listener) {
         plot.clear();
@@ -40,6 +42,7 @@ public final class AndroidPlotDailyChartRenderer implements ChartRenderer {
         if (mode == DailyChartMode.CUMULATIVE_DEVIATION) plot.addMarker(new YValueMarker(0, "0"));
         plot.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP && !model.series.isEmpty()) {
+                view.performClick();
                 Number x = plot.getXVal(event.getX());
                 if (x != null) {
                     int index = (int) Math.round(x.doubleValue());

@@ -47,7 +47,7 @@ public final class TimeEntryFormDialogFragment extends DialogFragment {
         Bundle args = requireArguments();
         start = savedInstanceState == null ? args.getLong(ARG_START) : savedInstanceState.getLong(ARG_START);
         end = savedInstanceState == null ? args.getLong(ARG_END) : savedInstanceState.getLong(ARG_END);
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_time_entry_form, null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_time_entry_form, null);
         Spinner category = view.findViewById(R.id.entry_category_input);
         String[] categoryNames = args.getStringArray(ARG_CATEGORY_NAMES);
         category.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, categoryNames));

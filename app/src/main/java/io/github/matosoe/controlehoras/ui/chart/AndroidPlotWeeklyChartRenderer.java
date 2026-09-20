@@ -1,4 +1,5 @@
 package io.github.matosoe.controlehoras.ui.chart;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.MotionEvent;
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import io.github.matosoe.controlehoras.ui.weekly.WeeklySummary;
 public final class AndroidPlotWeeklyChartRenderer implements WeeklyChartRenderer {
     private final XYPlot plot;
     public AndroidPlotWeeklyChartRenderer(@NonNull XYPlot plot) { this.plot = plot; }
+    @SuppressLint("ClickableViewAccessibility") // AndroidPlot's external XYPlot cannot override performClick; listener invokes it on ACTION_UP.
     @Override public void render(@NonNull WeeklyChartModel chart, @NonNull Set<Long> selected,
                                  @NonNull WeeklyChartMode mode, @NonNull PointListener listener) {
         plot.clear(); plot.removeYMarkers(); int size = chart.weeks.size();
@@ -41,6 +43,7 @@ public final class AndroidPlotWeeklyChartRenderer implements WeeklyChartRenderer
         if (mode == WeeklyChartMode.DEVIATION) plot.addMarker(new YValueMarker(0, "0"));
         final long selectedFirst = firstId;
         plot.setOnTouchListener((view, event) -> { if (event.getAction() == MotionEvent.ACTION_UP && selectedFirst >= 0) {
+            view.performClick();
             Number x = plot.getXVal(event.getX()); if (x != null) { int index = (int) Math.round(x.doubleValue()); if (index >= 0 && index < size) listener.onPoint(index, selectedFirst); }
         } return true; }); plot.redraw();
     }

@@ -1,11 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="16dp">
-    <EditText android:id="@+id/export_search" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/export_search" android:inputType="text"/>
+    <EditText android:id="@+id/export_search" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/export_search" android:importantForAutofill="no" android:inputType="text"/>
     <com.google.android.material.textfield.MaterialAutoCompleteTextView android:id="@+id/export_category" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/category" android:inputType="none"/>
     <Button android:id="@+id/export_dates" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/export_dates"/>
     <TextView android:id="@+id/export_filters" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-        <Button android:id="@+id/export_save" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/export_save"/>
-        <Button android:id="@+id/export_share" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/export_share"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" style="?android:attr/buttonBarStyle">
+        <Button android:id="@+id/export_save" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/export_save" style="?android:attr/buttonBarButtonStyle"/>
+        <Button android:id="@+id/export_share" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/export_share" style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>
     <TextView android:id="@+id/export_summary" android:layout_width="match_parent" android:layout_height="wrap_content"/>
     <TextView android:id="@+id/export_error" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@android:color/holo_red_dark"/>

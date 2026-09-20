@@ -64,13 +64,14 @@ public final class WeeklyFragment extends Fragment {
     private void showChartPoint(int weekIndex, long categoryId) {
         if (current == null || weekIndex >= current.chart.weeks.size()) return; WeeklySummary week = current.chart.weeks.get(weekIndex);
         WeeklyCategoryValue value = find(week, categoryId); DurationFormatter formatter = new DurationFormatter();
-        chartDetail.setText(week.sunday.format(DATE) + " · " + value.categoryName + "\nRealizado: " + formatter.hhMm(value.actualSeconds)
-                + " · Meta: " + formatter.hhMm(Math.round(value.targetSeconds)) + " · Desvio: " + signed(formatter.hhMm(Math.round(Math.abs(value.deviationSeconds))), value.deviationSeconds)
-                + " · " + (value.achieved ? "Atingida" : "Não atingida"));
+        chartDetail.setText(getString(R.string.weekly_chart_detail, week.sunday.format(DATE), value.categoryName,
+                formatter.hhMm(value.actualSeconds), formatter.hhMm(Math.round(value.targetSeconds)),
+                signed(formatter.hhMm(Math.round(Math.abs(value.deviationSeconds))), value.deviationSeconds),
+                getString(value.achieved ? R.string.goal_achieved : R.string.goal_not_achieved)));
     }
     private void showWeek(WeeklySummary week) {
-        DurationFormatter formatter = new DurationFormatter(); summary.setText(getString(R.string.weekly_range, week.sunday.format(DATE), week.endExclusive.minusDays(1).format(DATE), week.sequentialWeek)
-                + "\n" + getString(R.string.weekly_total, formatter.hhMm(week.registeredSeconds)));
+        DurationFormatter formatter = new DurationFormatter(); summary.setText(getString(R.string.weekly_summary_text,
+                week.sunday.format(DATE), week.endExclusive.minusDays(1).format(DATE), week.sequentialWeek, formatter.hhMm(week.registeredSeconds)));
         Map<Long, String> names = new HashMap<>(); for (CategoryEntity item : current.categories) names.put(item.id, item.name);
         StringBuilder lines = new StringBuilder();
         for (TimeEntryEntity entry : current.entries) if (entry.endEpochMillis > week.sunday.atStartOfDay(zone).toInstant().toEpochMilli()

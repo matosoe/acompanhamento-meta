@@ -15,7 +15,7 @@ final class TodayEntryAdapter extends RecyclerView.Adapter<TodayEntryAdapter.Ent
     private final List<TodayEntryItem> items = new ArrayList<>();
     private final OnEntryClickListener listener;
     TodayEntryAdapter(@NonNull OnEntryClickListener listener) { this.listener = listener; }
-    void submitList(@NonNull List<TodayEntryItem> newItems) { items.clear(); items.addAll(newItems); notifyDataSetChanged(); }
+    void submitList(@NonNull List<TodayEntryItem> newItems) { int previous=items.size(); items.clear(); if(previous>0) notifyItemRangeRemoved(0,previous); items.addAll(newItems); if(!newItems.isEmpty()) notifyItemRangeInserted(0,newItems.size()); }
     @NonNull @Override public EntryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new EntryViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_today_entry, parent, false));
     }

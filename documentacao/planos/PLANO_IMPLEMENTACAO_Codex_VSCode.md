@@ -734,17 +734,27 @@ Executar apenas se o ADR confirmar o recurso no MVP.
 - [x] **F10-01 — suíte unitária completa**
   - Concluído por: /root — 2026-09-20.
   - Evidência: cobertura unitária ampliada para intervalos inválidos, mudança de horário de verão, recorte de agregação, semana sequencial, metas zero/inválidas e CSV com vírgula/quebra de linha. `test` passou sem falhas; `lintDebug` e `assembleDebug` também passaram. Commit: `49a3304`. Os 31 avisos do lint permanecem registrados para F10-07.
-- [ ] **F10-02 — Room e migrações instrumentadas**
-- [ ] **F10-03 — testes de ViewModel**
-- [ ] **F10-04 — testes UI dos fluxos críticos**
-- [ ] **F10-05 — teste de cinco anos de dados sintéticos**
+- [x] **F10-02 — Room e migrações instrumentadas**
+  - Evidência: testes instrumentados de seed, DAO, repositório, schema inicial e migração Room passaram no AVD API 37.
+- [x] **F10-03 — testes de ViewModel**
+  - Evidência: `GoalsViewModelInstrumentedTest`, `DailyViewModelInstrumentedTest` e `WeeklyViewModelInstrumentedTest` validam carregamento das 12 categorias e alterações de período.
+- [x] **F10-04 — testes UI dos fluxos críticos**
+  - Evidência: `QualityNavigationInstrumentedTest` verifica Hoje, evolução diária, semanal, dados/exportação e configurações; a suíte instrumentada API 37 passou com 11 testes e zero falhas.
+- [x] **F10-05 — teste de cinco anos de dados sintéticos**
+  - Evidência: `DailyChartCalculatorTest` gera e processa um lançamento diário por cinco anos, preservando o total e as durações de primeiro/último dia.
 - [ ] **F10-06 — consultas e gráficos em até dois segundos no Galaxy M62**
-- [ ] **F10-07 — lint sem erros e revisão de warnings**
-- [ ] **F10-08 — contraste e tema escuro**
-- [ ] **F10-09 — fonte ampliada e layouts sem corte**
-- [ ] **F10-10 — content descriptions, foco e áreas de toque**
-- [ ] **F10-11 — alternativa textual para gráficos**
-- [ ] **F10-12 — inspeção de permissões e tráfego**
+- [x] **F10-07 — lint sem erros e revisão de warnings**
+  - Evidência: `lintDebug` passou com zero avisos após corrigir pluralização, internacionalização, autofill/rótulos, atualização dos adapters, áreas de toque e acessibilidade de clique dos gráficos.
+- [x] **F10-08 — contraste e tema escuro**
+  - Evidência: tema escuro inspecionado no AVD API 37; conteúdo, alerta e controles permanecem distinguíveis.
+- [x] **F10-09 — fonte ampliada e layouts sem corte**
+  - Evidência: inspeção com escala de fonte 1,3× revelou e corrigiu sobreposição da barra de status; `fitsSystemWindows` posiciona toolbar e conteúdo abaixo do inset do sistema.
+- [x] **F10-10 — content descriptions, foco e áreas de toque**
+  - Evidência: controles de dia possuem descrição, entradas receberam `labelFor`/autofill apropriados e tabelas acessíveis; lint sem avisos de acessibilidade.
+- [x] **F10-11 — alternativa textual para gráficos**
+  - Evidência: tabelas diária e semanal são verificadas por `QualityNavigationInstrumentedTest` como alternativa navegável aos gráficos.
+- [x] **F10-12 — inspeção de permissões e tráfego**
+  - Evidência: `aapt d permissions` no APK debug não encontrou Internet nem permissões de armazenamento; somente a permissão interna `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION` gerada pelo AndroidX. Inspeção de manifesto/código confirma saída apenas em `ACTION_CREATE_DOCUMENT` ou `ACTION_SEND` iniciado pelo usuário.
   - Confirmar ausência de permissão ampla de armazenamento.
   - Confirmar ausência de acesso à internet, exceto se uma dependência injustificadamente o introduzir.
   - Confirmar que dados só deixam o aparelho em exportação/compartilhamento iniciado pelo usuário.
@@ -758,7 +768,8 @@ Executar apenas se o ADR confirmar o recurso no MVP.
   - Reiniciar o aparelho e confirmar persistência Room e recuperação do cronômetro, se implementado.
   - Registrar versão do Android, nível de API, versão do One UI, espaço livre e build do aplicativo usado no teste.
 
-- [ ] **F10-14 — extremos de compatibilidade em emulador**
+- [x] **F10-14 — extremos de compatibilidade em emulador**
+  - Evidência: APK debug instalou e abriu no AVD API 26; a suíte UI completa passou no AVD API 37 (11 testes, zero falhas).
   - Executar smoke test no AVD API 26.
   - Executar suíte de UI no AVD do API estável mais recente.
   - Não aceitar um resultado apenas no Galaxy M62 como prova de compatibilidade com todo o intervalo suportado.
@@ -879,6 +890,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F10-02 a F10-05, F10-07 a F10-12, F10-14 | Concluídos; F10-06/F10-13 dependem do Galaxy M62 | `clean test lintDebug assembleDebug` passou; lint com 0 avisos; API 37: 11 testes instrumentados, 0 falhas; APK abriu no API 26 | ainda não criado |
 | 2026-09-20 | /root | F10-01 | Concluída | Casos-limite de domínio e CSV cobertos | `test`, `lintDebug` e `assembleDebug` passaram; 31 avisos de lint encaminhados para F10-07 | `49a3304` |
 | 2026-09-20 | /root | F08-01 a F08-06 | Implementação concluída; homologação Excel/Calc pendente | `CsvExporterTest` cobre BOM, seis colunas, RFC 4180 e meia-noite; `test`, `lintDebug`, `assembleDebug` e `connectedDebugAndroidTest` (8 testes, 0 falhas) passaram no AVD API 37; Excel/Calc ausentes | `c9958b2` |
 | 2026-09-20 | /root | F07 | Concluída | Semanas domingo–sábado, categorias, detalhe, barras, desvio e filtros; testes de semana completa/parcial | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `d88d844` |
