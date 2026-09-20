@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F02-04` — implementar repositórios e transações |
+| Próxima etapa | `F02-05` — migrações |
 
 ## 1. Objetivo deste plano
 
@@ -514,7 +514,9 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
   - Consulta de sobreposição usando `start < novoFim AND end > novoInicio`.
   - Edição deve excluir o próprio ID da busca.
 
-- [ ] **F02-04 — Implementar repositórios e transações**
+- [x] **F02-04 — Implementar repositórios e transações**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: repositórios encapsulam os DAOs; `TimeEntryRepository` normaliza duração, valida fim posterior ao início e bloqueia sobreposição em transação. `AppExecutors` centraliza trabalho de banco e oferece encerramento controlado. Testes instrumentados passaram no emulador API 37 e Galaxy M62.
   - DAO não deve ser chamado diretamente pela UI.
   - Validar duração e sobreposição na fronteira de persistência.
   - ExecutorService central e encerramento controlado.
@@ -809,6 +811,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F02-04 | Concluída | Repositórios, transação de escrita, validação de duração/sobreposição e executor central validados no emulador API 37 e Galaxy M62 | pendente neste commit |
 | 2026-09-20 | /root | F02-03 | Concluída | CRUD, ordenação, filtros e sobreposição/exclusão do próprio ID validados no emulador API 37 e Galaxy M62 | pendente neste commit |
 | 2026-09-20 | /root + proprietário | F02-02 | Concluída | Seed de 12 categorias, soma de 10.000 basis points e reabertura sem duplicação validados em emulador API 37 e Galaxy M62 | `48b1713` |
 | 2026-09-20 | /root | F02-01 | Concluída | Entidades Room com unicidade, FK e índices; `test` e `lintDebug` passaram | `970e0e1` |
