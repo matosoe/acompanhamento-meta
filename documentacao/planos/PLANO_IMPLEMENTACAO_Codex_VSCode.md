@@ -84,7 +84,7 @@ Pendências: <nenhuma ou lista objetiva>
 | F01 — bootstrap Android | Concluída | Arquiteto Android | `assembleDebug`, testes e lint passam; app aberto em emulador e Galaxy M62 |
 | F02 — dados locais | Concluída | Agente de dados | Room, seed, CRUD, reabertura, índices e bloqueio de sobreposição testados |
 | F03 — domínio e agregações | Não iniciado | Agente de domínio | Regras críticas cobertas por testes |
-| F04 — tela Hoje | Não iniciado | Agente de UI | CRUD vertical utilizável |
+| F04 — tela Hoje | Em andamento | Orquestrador | CRUD vertical utilizável |
 | F05 — metas | Não iniciado | Agente de UI Metas | Cálculos e edição validados |
 | F06 — evolução diária | Não iniciado | Agente de UI Gráficos | 7/30/90 dias validados |
 | F07 — semanal | Não iniciado | Agente de UI Semanal | Domingo–sábado validado |
@@ -565,7 +565,11 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
 
 ## 11. Fase F04 — tela Hoje e CRUD vertical
 
-- [ ] **F04-01 — listar dia selecionado e navegar por datas**
+- [x] **F04-01 — listar dia selecionado e navegar por datas**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: `TodayViewModel` mantém a data selecionada e consulta em segundo plano os intervalos sobrepostos ao dia local; `TodayFragment` observa `LiveData` e exibe uma lista cronológica com horário, categoria, duração e estado vazio. `./gradlew.bat test lintDebug assembleDebug` passou em 2026-09-20.
+  - Commit: ainda não criado.
+  - Pendências: F04-02 implementará o formulário e as ações da lista.
 - [ ] **F04-02 — formulário criar/editar**
 - [ ] **F04-03 — duração em tempo real e mensagens de validação**
 - [ ] **F04-04 — excluir com confirmação**
