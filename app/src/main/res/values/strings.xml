@@ -1,1 +1,41 @@
-<resources><string name="app_name">Controle de Horas</string><string name="placeholder">Em construção</string><string name="nav_today">Hoje</string><string name="nav_goals">Metas</string><string name="nav_daily">Evolução diária</string><string name="nav_weekly">Semanal</string><string name="nav_export">Dados e exportação</string><string name="nav_settings">Configurações</string><string name="previous_day">Dia anterior</string><string name="next_day">Próximo dia</string><string name="add_activity">Adicionar atividade</string><string name="today_loading">Carregando lançamentos do dia selecionado…</string><string name="today_empty">Nenhuma atividade registrada neste dia.</string><string name="today_entry_count">%1$d atividades registradas</string><string name="edit_activity">Editar atividade</string><string name="save">Salvar</string><string name="delete">Excluir</string><string name="category">Categoria</string><string name="start">Início</string><string name="end">Término</string><string name="note_optional">Observação (opcional)</string><string name="duration_value">Duração: %1$s</string><string name="invalid_time_range">O término deve ser posterior ao início.</string><string name="registered_total">Registrado: %1$s · Não classificado: %2$s</string><string name="delete_confirmation">Excluir esta atividade? Esta ação não pode ser desfeita.</string><string name="confirm_delete">Excluir atividade</string><string name="gap_warning">Há período sem classificação neste dia.</string><string name="overlap_warning">Foram detectados intervalos sobrepostos.</string><string name="exceeds_day_warning">O total diário excede 24 horas.</string><string name="custom_period">Escolher período personalizado</string><string name="target_percent">Meta percentual</string><string name="goal_type">Tipo de meta</string></resources>
+<resources>
+    <string name="app_name">Controle de Horas</string>
+    <string name="placeholder">Em construção</string>
+    <string name="nav_today">Hoje</string>
+    <string name="nav_goals">Metas</string>
+    <string name="nav_daily">Evolução diária</string>
+    <string name="nav_weekly">Semanal</string>
+    <string name="nav_export">Dados e exportação</string>
+    <string name="nav_settings">Configurações</string>
+    <string name="previous_day">Dia anterior</string>
+    <string name="next_day">Próximo dia</string>
+    <string name="add_activity">Adicionar atividade</string>
+    <string name="today_loading">Carregando lançamentos do dia selecionado…</string>
+    <string name="today_empty">Nenhuma atividade registrada neste dia.</string>
+    <string name="today_entry_count">%1$d atividades registradas</string>
+    <string name="edit_activity">Editar atividade</string>
+    <string name="save">Salvar</string>
+    <string name="delete">Excluir</string>
+    <string name="category">Categoria</string>
+    <string name="start">Início</string>
+    <string name="end">Término</string>
+    <string name="note_optional">Observação (opcional)</string>
+    <string name="duration_value">Duração: %1$s</string>
+    <string name="invalid_time_range">O término deve ser posterior ao início.</string>
+    <string name="registered_total">Registrado: %1$s · Não classificado: %2$s</string>
+    <string name="delete_confirmation">Excluir esta atividade? Esta ação não pode ser desfeita.</string>
+    <string name="confirm_delete">Excluir atividade</string>
+    <string name="gap_warning">Há período sem classificação neste dia.</string>
+    <string name="overlap_warning">Foram detectados intervalos sobrepostos.</string>
+    <string name="exceeds_day_warning">O total diário excede 24 horas.</string>
+    <string name="custom_period">Escolher período personalizado</string>
+    <string name="target_percent">Meta percentual</string>
+    <string name="goal_type">Tipo de meta</string>
+    <string name="goals_range">Período: %1$s a %2$s</string>
+    <string name="goals_totals">Registrado: %1$s · Não classificado: %2$s</string>
+    <string name="goals_target_warning">Soma das metas: %1$.1f%%. O valor pode ser salvo, mas o recomendado é 100%%.</string>
+    <string name="invalid_custom_period">A data final não pode ser anterior à inicial.</string>
+    <string name="invalid_target">Informe um percentual entre 0 e 100.</string>
+    <string name="goals_save_error">Não foi possível salvar a meta.</string>
+    <string-array name="goal_periods"><item>Dia</item><item>Semana</item><item>Personalizado</item></string-array>
+</resources>
