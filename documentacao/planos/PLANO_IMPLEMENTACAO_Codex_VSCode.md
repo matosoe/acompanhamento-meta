@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-20 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F02-03` — implementar DAOs |
+| Próxima etapa | `F02-04` — implementar repositórios e transações |
 
 ## 1. Objetivo deste plano
 
@@ -505,7 +505,9 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
   - Total inicial esperado: 10.000 basis points (100% do tempo semanal), conforme decisão do proprietário em 2026-09-20.
   - Testar banco novo e reabertura sem duplicação.
 
-- [ ] **F02-03 — Implementar DAOs**
+- [x] **F02-03 — Implementar DAOs**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: DAOs de categoria, registros e preferências fornecem CRUD, ordenação cronológica, filtros por período/categoria e busca de sobreposição `start < novoFim AND end > novoInicio`, com exclusão do próprio ID na edição. Testes instrumentados passaram no emulador API 37 e Galaxy M62.
   - CRUD de registros.
   - Listagem ordenada.
   - Filtros por período e categoria.
@@ -807,7 +809,8 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
-| 2026-09-20 | /root + proprietário | F02-02 | Concluída | Seed de 12 categorias, soma de 10.000 basis points e reabertura sem duplicação validados em emulador API 37 e Galaxy M62 | pendente neste commit |
+| 2026-09-20 | /root | F02-03 | Concluída | CRUD, ordenação, filtros e sobreposição/exclusão do próprio ID validados no emulador API 37 e Galaxy M62 | pendente neste commit |
+| 2026-09-20 | /root + proprietário | F02-02 | Concluída | Seed de 12 categorias, soma de 10.000 basis points e reabertura sem duplicação validados em emulador API 37 e Galaxy M62 | `48b1713` |
 | 2026-09-20 | /root | F02-01 | Concluída | Entidades Room com unicidade, FK e índices; `test` e `lintDebug` passaram | `970e0e1` |
 | 2026-09-20 | /root + proprietário | F01 | Concluída | Wrapper/AGP com JVM 17; `assembleDebug`, `test` e `lintDebug` passaram sem issues; `MainActivity` aberta no emulador API 37 e Galaxy M62 Android 13/API 33 | `6762eae` |
 | 2026-09-19 18:14 | /root | F00-06 | Concluída | ADR-003 aceito: AndroidPlot 1.6.0 selecionado após spike de origem, licença e compatibilidade; MPAndroidChart descartado | ainda não criado |

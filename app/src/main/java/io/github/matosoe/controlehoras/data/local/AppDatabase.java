@@ -9,6 +9,8 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import io.github.matosoe.controlehoras.data.local.dao.CategoryDao;
+import io.github.matosoe.controlehoras.data.local.dao.AppPreferenceDao;
+import io.github.matosoe.controlehoras.data.local.dao.TimeEntryDao;
 import io.github.matosoe.controlehoras.data.local.entity.AppPreferenceEntity;
 import io.github.matosoe.controlehoras.data.local.entity.CategoryEntity;
 import io.github.matosoe.controlehoras.data.local.entity.TimeEntryEntity;
@@ -23,6 +25,10 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase instance;
 
     public abstract CategoryDao categoryDao();
+
+    public abstract TimeEntryDao timeEntryDao();
+
+    public abstract AppPreferenceDao appPreferenceDao();
 
     public static AppDatabase getInstance(@NonNull Context context) {
         if (instance == null) {
