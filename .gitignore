@@ -1,0 +1,26 @@
+# Gradle and Android build artifacts
+.gradle/
+build/
+**/build/
+.cxx/
+externalNativeBuild/
+captures/
+
+# Local Android SDK configuration
+local.properties
+
+# Android Studio / IntelliJ IDEA user state
+.idea/
+*.iml
+
+# VS Code local workspace state
+.vscode/
+
+# Signing material and local credentials
+*.jks
+*.keystore
+keystore.properties
+
+# Operating-system files
+.DS_Store
+Thumbs.db

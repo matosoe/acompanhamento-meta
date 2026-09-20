@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-19 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F00-01` — criar o primeiro checkpoint Git |
+| Próxima etapa | `F00-02` — criar as instruções do projeto para agentes |
 
 ## 1. Objetivo deste plano
 
@@ -80,7 +80,7 @@ Pendências: <nenhuma ou lista objetiva>
 | Fase | Estado | Responsável | Gate de saída |
 |---|---|---|---|
 | PRE — ambiente e acessos | Em andamento | Proprietário + orquestrador | Toolchain verificada |
-| F00 — governança e decisões | Não iniciado | Orquestrador | ADRs aprovados |
+| F00 — governança e decisões | Em andamento | Orquestrador | ADRs aprovados |
 | F01 — bootstrap Android | Não iniciado | Arquiteto Android | `assembleDebug`, testes e lint passam |
 | F02 — dados locais | Não iniciado | Agente de dados | Room e CRUD testados |
 | F03 — domínio e agregações | Não iniciado | Agente de domínio | Regras críticas cobertas por testes |
@@ -367,7 +367,10 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
 
 ## 7. Fase F00 — governança e decisões
 
-- [ ] **F00-01 — Criar o primeiro checkpoint Git**
+- [x] **F00-01 — Criar o primeiro checkpoint Git**
+  - Concluído por: /root — 2026-09-19 18:14.
+  - Evidência: criado `.gitignore` para artefatos Android/Java/VS Code e material de assinatura, sem regras que excluam `documentacao/`. O remoto `origin` aponta para GitHub, mas `master...origin/master [gone]` confirma que a referência remota local está inconsistente; não foi feito push nem alteração no remoto.
+  - Commit: criado neste checkpoint.
   - Verificar o estado do remoto atualmente inconsistente.
   - Criar `.gitignore` Android/Java/VS Code sem excluir documentação.
   - Commit sugerido: `docs: add product specification and implementation plan`.
@@ -778,6 +781,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-19 18:14 | /root | F00-01 | Concluída | `.gitignore` Android/Java/VS Code criado; documentação não é ignorada; remoto `origin/master` ausente | criado neste checkpoint |
 | 2026-09-19 18:14 | /root + proprietário | PRE-05 | Concluída | Proprietário confirmou uso ativo do Codex no VS Code; sessão leu a especificação e executou comandos no workspace | ainda não criado |
 | 2026-09-19 18:14 | /root | PRE-04 | Concluída | Galaxy M62 autorizado pelo ADB como `device`; Samsung SM-M625F, Android 13/API 33, 1080x2400, 450 dpi; sem registrar identificador do aparelho | ainda não criado |
 | 2026-09-19 18:14 | /root | PRE-04A | Concluída | AVDs Pixel 5 API 26 e API 37 com Google APIs criados; cada um apareceu como `device` no ADB | ainda não criado |
