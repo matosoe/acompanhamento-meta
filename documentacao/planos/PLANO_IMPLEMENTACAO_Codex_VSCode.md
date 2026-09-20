@@ -568,7 +568,7 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
 - [x] **F04-01 — listar dia selecionado e navegar por datas**
   - Concluído por: /root — 2026-09-20.
   - Evidência: `TodayViewModel` mantém a data selecionada e consulta em segundo plano os intervalos sobrepostos ao dia local; `TodayFragment` observa `LiveData` e exibe uma lista cronológica com horário, categoria, duração e estado vazio. `./gradlew.bat test lintDebug assembleDebug` passou em 2026-09-20.
-  - Commit: ainda não criado.
+  - Commit: `05ebacf` (`feat(today): list entries for selected day`).
   - Pendências: F04-02 implementará o formulário e as ações da lista.
 - [ ] **F04-02 — formulário criar/editar**
 - [ ] **F04-03 — duração em tempo real e mensagens de validação**
