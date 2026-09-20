@@ -731,7 +731,9 @@ Executar apenas se o ADR confirmar o recurso no MVP.
 
 ## 15. Fase F10 — qualidade, acessibilidade e desempenho
 
-- [ ] **F10-01 — suíte unitária completa**
+- [x] **F10-01 — suíte unitária completa**
+  - Concluído por: /root — 2026-09-20.
+  - Evidência: cobertura unitária ampliada para intervalos inválidos, mudança de horário de verão, recorte de agregação, semana sequencial, metas zero/inválidas e CSV com vírgula/quebra de linha. `test` passou sem falhas; `lintDebug` e `assembleDebug` também passaram. Os 31 avisos do lint permanecem registrados para F10-07.
 - [ ] **F10-02 — Room e migrações instrumentadas**
 - [ ] **F10-03 — testes de ViewModel**
 - [ ] **F10-04 — testes UI dos fluxos críticos**
@@ -877,6 +879,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-20 | /root | F10-01 | Concluída | Casos-limite de domínio e CSV cobertos | `test`, `lintDebug` e `assembleDebug` passaram; 31 avisos de lint encaminhados para F10-07 | ainda não criado |
 | 2026-09-20 | /root | F08-01 a F08-06 | Implementação concluída; homologação Excel/Calc pendente | `CsvExporterTest` cobre BOM, seis colunas, RFC 4180 e meia-noite; `test`, `lintDebug`, `assembleDebug` e `connectedDebugAndroidTest` (8 testes, 0 falhas) passaram no AVD API 37; Excel/Calc ausentes | `c9958b2` |
 | 2026-09-20 | /root | F07 | Concluída | Semanas domingo–sábado, categorias, detalhe, barras, desvio e filtros; testes de semana completa/parcial | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `d88d844` |
 | 2026-09-20 | /root | F06 | Concluída | Evolução diária com períodos, seleção múltipla, linhas de horas/desvio, toque e tabela acessível; `DailyChartCalculatorTest` para meia-noite e MINIMO/MAXIMO | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `a438f6c` |

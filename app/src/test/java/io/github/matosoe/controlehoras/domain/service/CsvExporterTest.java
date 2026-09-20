@@ -25,4 +25,13 @@ public class CsvExporterTest {
                         + "2026-09-06;23:30:00;01:00:00;253;01:30:00;\"Itaú; \"\"Estudo\"\"\"\r\n",
                 new String(bytes, StandardCharsets.UTF_8));
     }
+
+    @Test public void quotesLineBreaksAndUsesConfiguredCommaSeparator() {
+        CsvExporter exporter = new CsvExporter();
+        byte[] bytes = exporter.export(Collections.singletonList(new CsvExporter.CsvRow(
+                "2026-09-06", "00:00:00", "00:01:00", 253, "00:01:00", "Casa\n\"teste\"")), ',');
+        assertEquals("\uFEFFData,Hora de Início,Hora de Término,Semana,Duração Real,Projeto\r\n"
+                        + "2026-09-06,00:00:00,00:01:00,253,00:01:00,\"Casa\n\"\"teste\"\"\"\r\n",
+                new String(bytes, StandardCharsets.UTF_8));
+    }
 }
