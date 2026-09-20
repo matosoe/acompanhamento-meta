@@ -890,7 +890,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
-| 2026-09-20 | /root | F10-02 a F10-05, F10-07 a F10-12, F10-14 | Concluídos; F10-06/F10-13 dependem do Galaxy M62 | `clean test lintDebug assembleDebug` passou; lint com 0 avisos; API 37: 11 testes instrumentados, 0 falhas; APK abriu no API 26 | ainda não criado |
+| 2026-09-20 | /root | F10-02 a F10-05, F10-07 a F10-12, F10-14 | Concluídos; F10-06/F10-13 dependem do Galaxy M62 | `clean test lintDebug assembleDebug` passou; lint com 0 avisos; API 37: 11 testes instrumentados, 0 falhas; APK abriu no API 26 | `e25486b` |
 | 2026-09-20 | /root | F10-01 | Concluída | Casos-limite de domínio e CSV cobertos | `test`, `lintDebug` e `assembleDebug` passaram; 31 avisos de lint encaminhados para F10-07 | `49a3304` |
 | 2026-09-20 | /root | F08-01 a F08-06 | Implementação concluída; homologação Excel/Calc pendente | `CsvExporterTest` cobre BOM, seis colunas, RFC 4180 e meia-noite; `test`, `lintDebug`, `assembleDebug` e `connectedDebugAndroidTest` (8 testes, 0 falhas) passaram no AVD API 37; Excel/Calc ausentes | `c9958b2` |
 | 2026-09-20 | /root | F07 | Concluída | Semanas domingo–sábado, categorias, detalhe, barras, desvio e filtros; testes de semana completa/parcial | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `d88d844` |
