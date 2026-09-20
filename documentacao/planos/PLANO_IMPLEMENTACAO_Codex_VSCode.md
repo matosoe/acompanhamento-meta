@@ -578,21 +578,27 @@ O gate também passou no Galaxy M62 conectado, e `gradlew --version` confirmou J
 - [x] **F04-03 — duração em tempo real e mensagens de validação**
   - Concluído por: /root — 2026-09-20.
   - Evidência: o formulário atualiza `Duração: HH:mm` após cada seleção de início/término e mostra erro quando o término não é posterior ao início; o repositório mantém a validação transacional contra sobreposição.
+  - Commit: `776ffb8` (`feat(today): complete daily CRUD flow`).
 - [x] **F04-04 — excluir com confirmação**
   - Concluído por: /root — 2026-09-20.
   - Evidência: registros podem ser abertos ao tocar na lista; o formulário de edição oferece Exclusão, seguida de confirmação explícita, e a lista é recarregada após a operação assíncrona.
+  - Commit: `776ffb8` (`feat(today): complete daily CRUD flow`).
 - [x] **F04-05 — totais e resumo compacto por categoria**
   - Concluído por: /root — 2026-09-20.
   - Evidência: `TodaySummaryCalculator` recorta intervalos ao dia local e expõe total registrado, não classificado e somas compactas por categoria, sem tabelas agregadas no Room.
+  - Commit: `776ffb8` (`feat(today): complete daily CRUD flow`).
 - [x] **F04-06 — alertas de lacuna, sobreposição e total defensivo acima de 24 h**
   - Concluído por: /root — 2026-09-20.
   - Evidência: a tela alerta lacunas, encontra sobreposições defensivamente na leitura e sinaliza totais acima de 24 h; o cálculo é coberto por `TodaySummaryCalculatorTest`.
+  - Commit: `776ffb8` (`feat(today): complete daily CRUD flow`).
 - [x] **F04-07 — restauração após rotação/recriação**
   - Concluído por: /root — 2026-09-20.
   - Evidência: o estado da data reside no `TodayViewModel` e início/término do diálogo são salvos em `onSaveInstanceState`. No emulador API 37, a data 19/09/2026 permaneceu selecionada após alterar a orientação.
+  - Commit: `776ffb8` (`feat(today): complete daily CRUD flow`).
 - [x] **F04-08 — teste de persistência após reiniciar app/aparelho**
   - Concluído por: /root — 2026-09-20.
   - Evidência: teste instrumentado reabre o banco após salvar; no emulador API 37, um registro de 01:00 salvo pela tela permaneceu visível após `force-stop` e nova abertura do app. `connectedDebugAndroidTest` passou.
+  - Commit: `776ffb8` (`feat(today): complete daily CRUD flow`).
 
 **Gate F04:** concluído em 2026-09-20. CRUD vertical, resumo e alertas validados; cruzamento de meia-noite é recortado pelo cálculo diário e coberto por teste unitário.
 
