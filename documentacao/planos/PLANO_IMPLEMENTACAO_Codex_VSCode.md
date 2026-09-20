@@ -661,7 +661,7 @@ Pendências: validação interativa no AVD API 37 deve ser repetida quando o dis
 
 Concluído por: /root — 2026-09-20.
 Evidência: `WeeklyFragment` mostra semanas recentes em ordem decrescente, detalhe de dias/registros, totais e percentuais por categoria, filtros de 4/8/12/26 semanas, barras de realizado/meta e linha de desvio. O renderer AndroidPlot continua isolado de modelos e ViewModels; a tabela semanal é a alternativa acessível. `WeeklyCalculatorTest` cobre domingo–sábado completo, intervalo parcial e tipos MINIMO/MAXIMO. `test`, `lintDebug` e `assembleDebug` passaram.
-Commit: ainda não criado.
+Commit: `d88d844` (`feat(weekly): add weekly tracking`).
 Pendências: validação interativa no AVD API 37 deve ser repetida quando o dispositivo deixar o estado `offline`.
 
 - [x] **F07-01 — lista de semanas recentes**
@@ -873,7 +873,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
-| 2026-09-20 | /root | F07 | Concluída | Semanas domingo–sábado, categorias, detalhe, barras, desvio e filtros; testes de semana completa/parcial | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | ainda não criado |
+| 2026-09-20 | /root | F07 | Concluída | Semanas domingo–sábado, categorias, detalhe, barras, desvio e filtros; testes de semana completa/parcial | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `d88d844` |
 | 2026-09-20 | /root | F06 | Concluída | Evolução diária com períodos, seleção múltipla, linhas de horas/desvio, toque e tabela acessível; `DailyChartCalculatorTest` para meia-noite e MINIMO/MAXIMO | `test`, `lintDebug` e `assembleDebug` passaram; AVD API 37 offline para checagem visual | `a438f6c` |
 | 2026-09-20 | /root | F02-05 | Concluída | Schema v1 e teste de migração inicial; proteção contra migração destrutiva; validação no emulador API 37 e Galaxy M62 | pendente neste commit |
 | 2026-09-20 | /root | F02-04 | Concluída | Repositórios, transação de escrita, validação de duração/sobreposição e executor central validados no emulador API 37 e Galaxy M62 | `81743b0` |
