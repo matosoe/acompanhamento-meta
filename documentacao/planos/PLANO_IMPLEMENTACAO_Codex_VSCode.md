@@ -12,7 +12,7 @@
 | Criado em | 2026-09-19 |
 | Última atualização | 2026-09-19 |
 | Estado geral | Em andamento |
-| Próxima etapa | `F00-04` — resolver ambiguidades funcionais em ADR-001 |
+| Próxima etapa | `F00-05` — resolver identidade e distribuição em ADR-002 |
 
 ## 1. Objetivo deste plano
 
@@ -394,7 +394,9 @@ Não é necessário cadastro de desenvolvedor Google para compilar, executar no 
   - Criar `.codex/config.toml` e os quatro agentes previstos.
   - Fazer uma delegação curta e somente leitura para validar a configuração.
 
-- [ ] **F00-04 — Resolver ADR-001: ambiguidades funcionais**
+- [x] **F00-04 — Resolver ADR-001: ambiguidades funcionais**
+  - Concluído por: /root + proprietário — 2026-09-19 18:14.
+  - Evidência: `ADR-001-ambiguidades-funcionais.md` aceito; CSV V1 sem observações, semana sequencial com época 2021-11-07, metas em snapshots trimestrais domingo–sábado, fuso local e intervalos `[início, fim)`. Cronômetro fora do MVP.
   - CSV exige seis colunas, mas um teste menciona observações. Recomendação: V1 com seis colunas, sem `note`; V2 poderá adicionar `Observação`.
   - Definir fórmula/época do identificador sequencial `Semana`.
   - Confirmar que alteração de meta afeta períodos históricos no MVP.
@@ -787,6 +789,7 @@ Adicionar entradas no topo da tabela, sem apagar histórico.
 
 | Data/hora | Agente | Tarefa | Resultado | Testes/evidência | Commit |
 |---|---|---|---|---|---|
+| 2026-09-19 18:14 | /root + proprietário | F00-04 | Concluída | ADR-001 aceito: CSV sem observações, metas trimestrais, fuso local, semana sequencial e cronômetro fora do MVP | ainda não criado |
 | 2026-09-19 18:14 | /root + qa-reviewer | F00-03 | Concluída | Delegação somente leitura confirmou configuração habilitada, limite 3 e quatro perfis TOML alinhados a `AGENTS.md` | ainda não criado |
 | 2026-09-19 18:14 | /root | F00-03 | Parcial | Configuração e quatro agentes TOML criados; falta validar uma delegação curta em interface | `cb2a77a` |
 | 2026-09-19 18:14 | /root | F00-02 | Concluída | `AGENTS.md` criado com arquitetura, segurança, domínio e qualidade alinhados à especificação | `cb2a77a` |
