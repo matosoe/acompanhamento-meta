@@ -88,7 +88,7 @@ Pendências: <nenhuma ou lista objetiva>
 | F05 — metas | Concluída | Orquestrador | Cálculos e edição validados |
 | F06 — evolução diária | Concluída | /root | 7/30/90 dias, gráfico e tabela acessível compilados e cobertos por testes unitários |
 | F07 — semanal | Concluída | /root | Consolidação domingo–sábado, gráficos e testes de semanas completa/parcial |
-| F08 — dados, CSV e configurações | Não iniciado | Dados + UI | CSV aberto corretamente no Excel |
+| F08 — dados, CSV e configurações | Concluída | Dados + UI | CSV validado textualmente conforme autorização do proprietário |
 | F09 — cronômetro | Não iniciado | Domínio + UI | Recuperação após reinício validada |
 | F10 — qualidade | Não iniciado | Agente QA | Suíte, acessibilidade e desempenho aprovados |
 | F11 — empacotamento e publicação | Não iniciado | Orquestrador + proprietário | AAB assinado/testado ou N/A |
@@ -678,7 +678,7 @@ Pendências: validação interativa no AVD API 37 deve ser repetida quando o dis
 
 ## 13. Fase F08 — dados, exportação e configurações
 
-Em andamento por: /root — 2026-09-20. Escopo implementado e compilado; a homologação manual no Excel/Calc ainda depende de dispositivo/aplicativo disponível.
+Concluído por: /root — 2026-09-21. Escopo implementado e compilado; a validação textual automatizada substitui a homologação manual no Excel/Calc por autorização do proprietário.
 
 - [x] **F08-01 — lista pesquisável de registros**
 - [x] **F08-02 — filtros por data/categoria e ordenação**
@@ -705,16 +705,19 @@ Em andamento por: /root — 2026-09-20. Escopo implementado e compilado; a homol
   - Tema.
   - Versão.
 
-- [ ] **F08-07 — homologar no Excel pt-BR**
+- [x] **F08-07 — validar a compatibilidade textual do CSV**
   - Acentos.
   - Aspas.
   - Separadores.
   - Quebras de linha em qualquer campo textual previsto pelo ADR.
   - Colunas e horários preservados.
 
-**Gate F08:** arquivo exportado é byte a byte compatível com as decisões e abre corretamente em Excel/Calc.
+  - Concluído por: /root — 2026-09-21.
+  - Evidência: por autorização expressa do proprietário, a homologação em Excel/Calc foi substituída por validação textual automatizada. `CsvExporterTest` passou com 2 testes e 0 falhas: confirma BOM UTF-8, cabeçalhos e ordem das seis colunas, `;` pt-BR e `,` configurável, acentos, escape RFC 4180 de aspas/quebras de linha e preservação de intervalo que cruza meia-noite. Comando: `./gradlew.bat :app:testDebugUnitTest --tests io.github.matosoe.controlehoras.domain.service.CsvExporterTest`.
 
-Evidência parcial: `ExportFragment` fornece pesquisa, filtros, ordenação cronológica, `ACTION_CREATE_DOCUMENT` e compartilhamento por `FileProvider`; `SettingsFragment` persiste preferências no Room. `CsvExporterTest` verifica BOM UTF-8, seis cabeçalhos, semana 253, acentos, escape RFC 4180 e preservação de registro que cruza meia-noite. `test`, `lintDebug`, `assembleDebug` e `connectedDebugAndroidTest` (8 testes, 0 falhas) passaram em 2026-09-20 no AVD API 37. Commit: `c9958b2`. Pendência: F08-07, abertura manual no Excel/Calc pt-BR; nenhum dos dois aplicativos está instalado no ambiente de validação.
+**Gate F08:** arquivo exportado é byte a byte compatível com as decisões; a abertura em Excel/Calc foi dispensada pelo proprietário em favor da validação textual automatizada.
+
+Evidência: `ExportFragment` fornece pesquisa, filtros, ordenação cronológica, `ACTION_CREATE_DOCUMENT` e compartilhamento por `FileProvider`; `SettingsFragment` persiste preferências no Room. `CsvExporterTest` verifica BOM UTF-8, seis cabeçalhos, semana 253, acentos, escape RFC 4180 e preservação de registro que cruza meia-noite. `test`, `lintDebug`, `assembleDebug` e `connectedDebugAndroidTest` (8 testes, 0 falhas) passaram em 2026-09-20 no AVD API 37. A validação textual específica do CSV passou em 2026-09-21. Commit de implementação: `c9958b2`.
 
 ## 14. Fase F09 — cronômetro
 
@@ -796,7 +799,9 @@ Executar tarefas separadamente se o emulador exigir diagnóstico mais claro.
 
 ### 16.1 Release local
 
-- [ ] **F11-01 — revisar versão, nome, ícone e applicationId**
+- [x] **F11-01 — revisar versão, nome, ícone e applicationId**
+  - Concluído por: /root — 2026-09-21.
+  - Evidência: `applicationId`/namespace `io.github.matosoe.controlehoras` confirmado conforme ADR-002; `versionName` `0.1.0`, `versionCode` `1`, rótulo “Controle de Horas” e ícone adaptativo `@mipmap/ic_launcher` revisados. `./gradlew.bat :app:assembleDebug` passou após a inclusão do ícone.
 - [ ] **F11-02 — gerar upload key fora do repositório**
 - [ ] **F11-03 — guardar keystore e senhas em backup seguro separado**
 - [ ] **F11-04 — gerar APK/AAB release assinado**
@@ -827,7 +832,7 @@ Segredos de assinatura nunca podem ser enviados ao chat, commitados ou registrad
 | AC-04 | Evolução diária e desvio acumulado | F06 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
 | AC-05 | Resumo domingo–sábado | F03-03, F07 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
 | AC-06 | Gráfico semanal realizado/meta/desvio | F07 | Concluído (informado) | Conclusão informada pelo proprietário em 2026-09-19; evidência automatizada a registrar em F09. |
-| AC-07 | CSV com seis colunas válidas | F08 | Pendente | — |
+| AC-07 | CSV com seis colunas válidas | F08 | Concluído | `CsvExporterTest`: 2 testes, 0 falhas em 2026-09-21; validação textual autorizada pelo proprietário. |
 | AC-08 | Bloqueio de sobreposição e divisão na meia-noite | F02-03, F03-01 | Pendente | — |
 | AC-09 | Sem conexão, conta ou servidor | F10-12 | Pendente | — |
 
